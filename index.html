@@ -710,7 +710,7 @@ footer p { margin: 4px 0; max-width: 80ch; }
         const d = top(Y, n) - top(Y, c);
         if (d > 1.4 && Y.h[c] > 0) { const mv = Math.min(Y.h[c], (d - 1.4) * 0.3); Y.h[c] -= mv; Y.h[n] += mv; }
         else if (d < -1.4 && Y.h[n] > 0) { const mv = Math.min(Y.h[n], (-d - 1.4) * 0.3); Y.h[n] -= mv; Y.h[c] += mv; }
-      } else if (Y === L) {
+      } else if (Y === L && SEASONS[season].kind === "snow") {
         // snow at the edge of a letter slowly tumbles off
         if (L.has[c] && (!L.has[n] || L.surf[n] > L.surf[c]) && L.h[c] > 2.2 && Math.random() < 0.02) { L.h[c] -= 1; spill(c, 1); }
         else if (L.has[n] && (!L.has[c] || L.surf[c] > L.surf[n]) && L.h[n] > 2.2 && Math.random() < 0.02) { L.h[n] -= 1; spill(n, -1); }

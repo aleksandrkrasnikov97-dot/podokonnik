@@ -7,3 +7,6 @@
 Скачать: [podokonnik.zip](podokonnik.zip)
 
 Музыка: Kevin MacLeod (incompetech.com), CC BY 4.0. Видео для обоев: авторы Wikimedia Commons.
+
+
+Сцены Wallpaper Engine воспроизводятся движком [WebWallGL](https://github.com/WTStarMark/webwallgl) (MIT).

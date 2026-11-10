@@ -1,1 +1,1 @@
-{"version": "1.7", "exe": "/podokonnik/Podokonnik.exe", "size": 737792, "notes": "сцены рисует мощная видеокарта, параллакс без лагов"}
+{"version": "1.8", "exe": "/podokonnik/Podokonnik.exe", "size": 739328, "notes": "сцена не подвисает после закрытия окна, меньше нагрузка на видеокарту"}

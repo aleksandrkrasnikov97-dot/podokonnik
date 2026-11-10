@@ -80,12 +80,21 @@ a { color: var(--lamp); text-underline-offset: 3px; }
   -webkit-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
-  background: linear-gradient(var(--night-deep), var(--sky) 95%);
+  background: var(--night-deep);
   touch-action: pan-y;
 }
-.hero[data-season="spring"] { --sky: #3a3f7e; }
-.hero[data-season="summer"] { --sky: #1f4b74; }
-.hero[data-season="autumn"] { --sky: #3e3460; }
+.skies { position: absolute; inset: 0; z-index: 0; }
+.skies i { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease; }
+.skies i[data-s="winter"] { background: linear-gradient(#0d1430, #233a73 95%); }
+.skies i[data-s="spring"] { background: linear-gradient(#2a2558, #7a5596 55%, #e3a3bf 100%); }
+.skies i[data-s="summer"] { background: linear-gradient(#174b8c, #3a8acb 60%, #8fcdea 100%); }
+.skies i[data-s="autumn"] { background: linear-gradient(#25193a, #6e3848 55%, #d9773f 100%); }
+.hero[data-season="winter"] .skies i[data-s="winter"],
+.hero[data-season="spring"] .skies i[data-s="spring"],
+.hero[data-season="summer"] .skies i[data-s="summer"],
+.hero[data-season="autumn"] .skies i[data-s="autumn"] { opacity: 1; }
+.hero .meta { color: rgba(236,240,252,.8); }
+.hero .lede { text-shadow: 0 1px 12px rgba(10,16,40,.35); }
 .hero canvas {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
@@ -140,7 +149,7 @@ h1.title {
 .hero.live h1.title { color: transparent; }
 .hero-note {
   position: absolute;
-  right: 0;
+  right: 22%;
   top: 100%;
   margin-top: 6px;
   display: flex;
@@ -316,6 +325,7 @@ footer p { margin: 4px 0; max-width: 80ch; }
 </style>
 
 <header class="hero" id="hero" data-season="winter">
+  <div class="skies" aria-hidden="true"><i data-s="winter"></i><i data-s="spring"></i><i data-s="summer"></i><i data-s="autumn"></i></div>
   <div class="sill" id="sill"></div>
   <canvas id="sky" aria-hidden="true"></canvas>
   <div class="wrap hero-inner">
@@ -604,7 +614,8 @@ footer p { margin: 4px 0; max-width: 80ch; }
     const m = lc.measureText(title.textContent);
     const x0 = rr.left - hr.left;
     const base = rr.top - hr.top + (m.fontBoundingBoxAscent || parseFloat(cs.fontSize) * 0.97);
-    lc.fillStyle = "#f6b34f";
+    txtArgs = { font, x0, base };
+    lc.fillStyle = LETTER[season];
     lc.fillText(title.textContent, x0, base);
 
     const img = lc.getImageData(0, 0, letters.width, letters.height).data;
@@ -627,6 +638,7 @@ footer p { margin: 4px 0; max-width: 80ch; }
     stars = [];
     for (let i = 0; i < Math.round(W / 14); i++) stars.push({ x: rnd(0, W), y: rnd(0, sillTop * 0.8), r: rnd(0.8, 1.8), ph: rnd(0, 6.28), sp: rnd(0.6, 1.6) });
     falling = []; settled = [];
+    buildScene();
     prefill();
     hero.classList.add("live");
     ready = true;
@@ -766,6 +778,8 @@ footer p { margin: 4px 0; max-width: 80ch; }
     settled = []; L.h.fill(0); S.h.fill(0);
     season = s;
     hero.dataset.season = s;
+    decoT = reduce ? 9 : 0;
+    paintLetters();
     document.querySelectorAll(".seasons button").forEach(b => b.setAttribute("aria-pressed", b.dataset.s === s ? "true" : "false"));
     hintEl.textContent = SEASONS[s].hint;
     if (reduce) prefill();
@@ -788,12 +802,21 @@ footer p { margin: 4px 0; max-width: 80ch; }
 
   function step(dt) {
     t += dt;
+    decoT += dt;
     const cfg = SEASONS[season];
     const gust = Math.sin(t * 0.31) * 0.6 + Math.sin(t * 0.13 + 1) * 0.4;
     const wind = cfg.wind * (0.4 + gust);
     if (!reduce) {
       spawnAcc += W * cfg.rate * dt;
-      while (spawnAcc >= 1) { spawnAcc -= 1; falling.push(make(cfg.kind, rnd(-wind * 3, W), -12)); }
+      while (spawnAcc >= 1) {
+        spawnAcc -= 1;
+        if (CROWN[season] && season !== "summer" && decoT > 1.2 && Math.random() < 0.3) {
+          const { sc, base, tx } = sceneGeom();
+          const p = make(cfg.kind, tx + rnd(-70, 70) * sc, base - 190 * sc + rnd(-30, 40) * sc);
+          p.vy *= 0.3;
+          falling.push(p);
+        } else falling.push(make(cfg.kind, rnd(-wind * 3, W), -12));
+      }
     }
     for (let i = falling.length - 1; i >= 0; i--) {
       const p = falling[i];
@@ -877,13 +900,219 @@ footer p { margin: 4px 0; max-width: 80ch; }
     ctx.restore();
   }
 
+
+  /* ---------- scenery that changes with the season ---------- */
+  const LETTER = { winter: "#f6b34f", spring: "#ffc6dc", summer: "#ffe36e", autumn: "#ffa24f" };
+  const CROWN = {
+    spring: ["#f7b4cc", "#fbd3e0", "#f39ab9", "#ffe6ef", "#ee8fb2"],
+    summer: ["#3f8f3a", "#5cae48", "#2f7a33", "#76c25a", "#4b9c40"],
+    autumn: ["#e8752f", "#c9442b", "#eda53a", "#d9602c", "#b8452a"]
+  };
+  let txtArgs = null, decoT = 0, blobs = [], tufts = [];
+
+  function paintLetters() {
+    if (!txtArgs || !letters) return;
+    const lc = letters.getContext("2d");
+    lc.setTransform(1, 0, 0, 1, 0, 0);
+    lc.clearRect(0, 0, letters.width, letters.height);
+    lc.setTransform(dpr, 0, 0, dpr, 0, 0);
+    lc.font = txtArgs.font;
+    lc.fillStyle = LETTER[season];
+    lc.fillText(title.textContent, txtArgs.x0, txtArgs.base);
+  }
+  function seeded(n) { let v = n; return () => (v = (v * 16807) % 2147483647) / 2147483647; }
+  function sceneGeom() {
+    const sc = W < 600 ? 0.38 : Math.max(0.5, Math.min(1, W / 1280));
+    return { sc, base: S.surf[0], tx: Math.min(W * 0.86, W - 85 * sc) };
+  }
+  function buildScene() {
+    const r = seeded(11);
+    blobs = [];
+    for (let i = 0; i < 30; i++) {
+      const a = r() * 6.283, d = Math.sqrt(r());
+      blobs.push({ dx: Math.cos(a) * d * 80, dy: Math.sin(a) * d * 52, rr: 20 + r() * 20, k: (r() * 5) | 0, ph: r() * 6 });
+    }
+    tufts = [];
+    for (let x = 0; x < W; x += 4) tufts.push({ x: x + r() * 3, h: 4 + r() * 8, lean: r() * 2 - 1, k: r() });
+  }
+  const ease = v => 1 - Math.pow(1 - Math.min(1, Math.max(0, v)), 3);
+
+  function drawTree(tx, base, sc, g) {
+    // trunk and two branches
+    ctx.fillStyle = "#5a3a26";
+    ctx.beginPath();
+    ctx.moveTo(tx - 10 * sc, base); ctx.lineTo(tx - 5 * sc, base - 160 * sc * g);
+    ctx.lineTo(tx + 5 * sc, base - 160 * sc * g); ctx.lineTo(tx + 10 * sc, base);
+    ctx.fill();
+    ctx.strokeStyle = "#5a3a26"; ctx.lineCap = "round"; ctx.lineWidth = 6 * sc;
+    ctx.beginPath();
+    ctx.moveTo(tx, base - 100 * sc * g); ctx.lineTo(tx - 46 * sc * g, base - 170 * sc * g);
+    ctx.moveTo(tx, base - 120 * sc * g); ctx.lineTo(tx + 42 * sc * g, base - 185 * sc * g);
+    ctx.stroke();
+    const cols = CROWN[season], cy = base - 195 * sc;
+    blobs.forEach((b, i) => {
+      const k = ease(decoT * 1.2 - i * 0.025);
+      if (k <= 0) return;
+      ctx.fillStyle = cols[b.k];
+      ctx.beginPath();
+      ctx.arc(tx + (b.dx + Math.sin(t * 0.9 + b.ph) * 1.5) * sc, cy + b.dy * sc, b.rr * sc * k, 0, 6.283);
+      ctx.fill();
+    });
+  }
+
+  function drawSpruce(tx, base, sc, g) {
+    ctx.fillStyle = "#4a3022";
+    ctx.fillRect(tx - 6 * sc, base - 26 * sc * g, 12 * sc, 26 * sc * g);
+    for (let i = 0; i < 4; i++) {
+      const w = (78 - i * 16) * sc * g, y0 = base - (20 + i * 46) * sc * g, hgt = 70 * sc * g;
+      ctx.fillStyle = i % 2 ? "#1d4a37" : "#22553f";
+      ctx.beginPath(); ctx.moveTo(tx - w, y0); ctx.lineTo(tx, y0 - hgt); ctx.lineTo(tx + w, y0); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "#eef4ff";
+      ctx.beginPath(); ctx.moveTo(tx - w * 0.55, y0 - hgt * 0.45); ctx.lineTo(tx, y0 - hgt); ctx.lineTo(tx + w * 0.55, y0 - hgt * 0.45);
+      ctx.quadraticCurveTo(tx + w * 0.2, y0 - hgt * 0.36, tx, y0 - hgt * 0.5); ctx.quadraticCurveTo(tx - w * 0.2, y0 - hgt * 0.36, tx - w * 0.55, y0 - hgt * 0.45);
+      ctx.fill();
+    }
+  }
+
+  function drawSnowman(x, base, sc, g) {
+    const s = sc * g;
+    if (s <= 0.01) return;
+    const r1 = 34 * s, r2 = 25 * s, r3 = 18 * s;
+    const y1 = base - r1 * 0.85, y2 = y1 - r1 - r2 * 0.75, y3 = y2 - r2 - r3 * 0.75;
+    ctx.strokeStyle = "#6b4426"; ctx.lineWidth = 3 * s; ctx.lineCap = "round";
+    ctx.beginPath();
+    ctx.moveTo(x - r2 * 0.8, y2); ctx.lineTo(x - r2 * 2.1, y2 - r2 * 0.9); ctx.lineTo(x - r2 * 2.4, y2 - r2 * 1.3);
+    ctx.moveTo(x + r2 * 0.8, y2); ctx.lineTo(x + r2 * 2.1, y2 - r2 * 0.7); ctx.lineTo(x + r2 * 2.5, y2 - r2 * 0.5);
+    ctx.stroke();
+    [[y1, r1], [y2, r2], [y3, r3]].forEach(([y, r]) => {
+      ctx.fillStyle = "#c5d3ec"; ctx.beginPath(); ctx.arc(x + 2 * s, y + 2 * s, r, 0, 6.283); ctx.fill();
+      ctx.fillStyle = "#f6f9ff"; ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.fill();
+    });
+    ctx.fillStyle = "#d8473b";
+    ctx.fillRect(x - r3 * 1.05, y3 + r3 * 0.6, r3 * 2.1, 6 * s);
+    ctx.fillRect(x + r3 * 0.35, y3 + r3 * 0.6, 7 * s, 22 * s);
+    ctx.fillStyle = "#1c2440";
+    ctx.beginPath(); ctx.arc(x - 6 * s, y3 - 3 * s, 2.4 * s, 0, 6.283); ctx.arc(x + 6 * s, y3 - 3 * s, 2.4 * s, 0, 6.283); ctx.fill();
+    [y2 - 6 * s, y2 + 8 * s, y1 - 10 * s].forEach(yy => { ctx.beginPath(); ctx.arc(x, yy, 2.8 * s, 0, 6.283); ctx.fill(); });
+    ctx.fillStyle = "#f08a24";
+    ctx.beginPath(); ctx.moveTo(x, y3 + 1 * s); ctx.lineTo(x + 16 * s, y3 + 4 * s); ctx.lineTo(x, y3 + 6 * s); ctx.fill();
+    ctx.fillStyle = "#7d8aa6";
+    ctx.beginPath(); ctx.moveTo(x - 13 * s, y3 - r3 * 0.75); ctx.lineTo(x + 13 * s, y3 - r3 * 0.75); ctx.lineTo(x + 10 * s, y3 - r3 * 0.75 - 18 * s); ctx.lineTo(x - 10 * s, y3 - r3 * 0.75 - 18 * s); ctx.fill();
+    ctx.fillStyle = "#5f6b87"; ctx.fillRect(x - 16 * s, y3 - r3 * 0.75 - 3 * s, 32 * s, 4 * s);
+  }
+
+  function drawPumpkin(x, base, sc, g) {
+    const s = sc * g;
+    if (s <= 0.01) return;
+    ctx.fillStyle = "#5d7a2a"; ctx.fillRect(x - 2.5 * s, base - 46 * s, 5 * s, 12 * s);
+    [[-16, "#d9652a"], [16, "#d9652a"], [-7, "#ee8436"], [7, "#ee8436"], [0, "#f5963f"]].forEach(([dx, c]) => {
+      ctx.fillStyle = c; ctx.beginPath(); ctx.ellipse(x + dx * s, base - 18 * s, 15 * s, 18 * s, 0, 0, 6.283); ctx.fill();
+    });
+  }
+
+  function drawTulip(x, base, sc, g, col, hgt) {
+    const h = hgt * sc * g;
+    if (h < 1) return;
+    ctx.strokeStyle = "#4f9a3f"; ctx.lineWidth = 2.5 * sc;
+    ctx.beginPath(); ctx.moveTo(x, base); ctx.quadraticCurveTo(x + 3 * sc, base - h * 0.5, x, base - h); ctx.stroke();
+    ctx.fillStyle = "#5cae48";
+    ctx.beginPath(); ctx.ellipse(x - 6 * sc, base - h * 0.3, 3 * sc, 10 * sc * g, -0.5, 0, 6.283); ctx.fill();
+    ctx.fillStyle = col;
+    const w = 8 * sc * g;
+    ctx.beginPath();
+    ctx.moveTo(x - w, base - h); ctx.lineTo(x - w, base - h - w * 1.6); ctx.lineTo(x - w * 0.4, base - h - w * 1.1);
+    ctx.lineTo(x, base - h - w * 1.8); ctx.lineTo(x + w * 0.4, base - h - w * 1.1); ctx.lineTo(x + w, base - h - w * 1.6); ctx.lineTo(x + w, base - h);
+    ctx.quadraticCurveTo(x, base - h + w * 0.9, x - w, base - h);
+    ctx.fill();
+  }
+
+  function drawSunflower(x, base, sc, g, hgt) {
+    const h = hgt * sc * g;
+    if (h < 1) return;
+    ctx.strokeStyle = "#3f8f3a"; ctx.lineWidth = 3.5 * sc;
+    ctx.beginPath(); ctx.moveTo(x, base); ctx.lineTo(x + 2 * sc, base - h); ctx.stroke();
+    ctx.fillStyle = "#4b9c40";
+    ctx.beginPath(); ctx.ellipse(x + 9 * sc, base - h * 0.45, 9 * sc * g, 4 * sc, 0.4, 0, 6.283); ctx.fill();
+    const cx = x + 2 * sc, cy = base - h, R = 16 * sc * g;
+    ctx.fillStyle = "#ffc928";
+    for (let i = 0; i < 14; i++) {
+      const a = i * 0.449 + t * 0.05;
+      ctx.beginPath(); ctx.ellipse(cx + Math.cos(a) * R, cy + Math.sin(a) * R, 7 * sc * g, 3.4 * sc * g, a, 0, 6.283); ctx.fill();
+    }
+    ctx.fillStyle = "#6b3e12"; ctx.beginPath(); ctx.arc(cx, cy, R * 0.75, 0, 6.283); ctx.fill();
+  }
+
+  function drawGrass(base, g, tall) {
+    if (g <= 0) return;
+    ctx.lineWidth = 1.4;
+    tufts.forEach(f => {
+      const h = f.h * tall * g, sway = Math.sin(t * 1.4 + f.x * 0.05) * 1.2;
+      ctx.strokeStyle = f.k < 0.5 ? "#5fae4a" : "#7cc35a";
+      ctx.beginPath(); ctx.moveTo(f.x, base + 1); ctx.quadraticCurveTo(f.x + f.lean, base - h * 0.5, f.x + f.lean * 2 + sway, base - h); ctx.stroke();
+    });
+  }
+
+  function drawButterflies(tx, base, sc, cols) {
+    cols.forEach((c, i) => {
+      const x = tx + Math.sin(t * 0.5 + i * 2.1) * 150 * sc - 60 * sc;
+      const y = base - 200 * sc + Math.sin(t * 1.1 + i) * 60 * sc;
+      const f = Math.abs(Math.sin(t * 13 + i)) * 7 * sc + 2;
+      ctx.fillStyle = c;
+      ctx.beginPath(); ctx.ellipse(x - f * 0.6, y, f, 5 * sc, -0.4, 0, 6.283); ctx.ellipse(x + f * 0.6, y, f, 5 * sc, 0.4, 0, 6.283); ctx.fill();
+    });
+  }
+
+  function drawSun(sc, g) {
+    const x = W - 80 * sc - 16, y = 96 * sc + 40, R = 38 * sc * g;
+    if (R < 1) return;
+    const gl = ctx.createRadialGradient(x, y, R * 0.6, x, y, R * 3.2);
+    gl.addColorStop(0, "rgba(255,236,150,.55)"); gl.addColorStop(1, "rgba(255,236,150,0)");
+    ctx.fillStyle = gl; ctx.beginPath(); ctx.arc(x, y, R * 3.2, 0, 6.283); ctx.fill();
+    ctx.strokeStyle = "rgba(255,228,120,.8)"; ctx.lineWidth = 3 * sc; ctx.lineCap = "round";
+    ctx.beginPath();
+    for (let i = 0; i < 12; i++) { const a = i * 0.5236 + t * 0.15; ctx.moveTo(x + Math.cos(a) * R * 1.3, y + Math.sin(a) * R * 1.3); ctx.lineTo(x + Math.cos(a) * R * 1.65, y + Math.sin(a) * R * 1.65); }
+    ctx.stroke();
+    ctx.fillStyle = "#ffe27a"; ctx.beginPath(); ctx.arc(x, y, R, 0, 6.283); ctx.fill();
+  }
+
+  function drawScene() {
+    if (!S) return;
+    const { sc, base, tx } = sceneGeom();
+    const g = ease(decoT / 1.1);
+    ctx.save();
+    ctx.lineCap = "round";
+    if (season === "winter") {
+      drawSpruce(tx, base, sc, g);
+      drawSnowman(tx - 125 * sc, base, sc, ease(decoT / 1.1 - 0.3));
+    } else if (season === "spring") {
+      drawGrass(base, g, 0.9);
+      drawTree(tx, base, sc, g);
+      [[-150, "#e8475f", 46], [-128, "#ffd34d", 38], [-106, "#ff7aa8", 50], [-84, "#f3f0ff", 40], [62, "#e8475f", 42], [84, "#ffd34d", 36]].forEach(([dx, c, h], i) => drawTulip(tx + dx * sc, base, sc, ease(decoT / 1.1 - 0.2 - i * 0.06), c, h));
+      drawButterflies(tx, base, sc, ["#ffd34d"]);
+    } else if (season === "summer") {
+      drawSun(sc, g);
+      drawGrass(base, g, 1.5);
+      drawTree(tx, base, sc, g);
+      drawSunflower(tx - 140 * sc, base, sc, ease(decoT / 1.1 - 0.25), 92);
+      drawSunflower(tx - 104 * sc, base, sc, ease(decoT / 1.1 - 0.35), 70);
+      drawButterflies(tx, base, sc, ["#ff8ac2", "#ffd34d"]);
+    } else {
+      drawTree(tx, base, sc, g);
+      drawPumpkin(tx - 115 * sc, base, sc, ease(decoT / 1.1 - 0.3));
+      drawPumpkin(tx - 80 * sc, base, sc * 0.7, ease(decoT / 1.1 - 0.4));
+    }
+    ctx.restore();
+  }
+
   function draw() {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.fillStyle = "#fff";
-    for (const s of stars) { ctx.globalAlpha = 0.15 + 0.45 * Math.pow(Math.sin(t * s.sp + s.ph), 2); ctx.fillRect(s.x, s.y, s.r, s.r); }
+    const starK = { winter: 1, spring: 0.45, summer: 0, autumn: 0.2 }[season];
+    if (starK) for (const s of stars) { ctx.globalAlpha = starK * (0.15 + 0.45 * Math.pow(Math.sin(t * s.sp + s.ph), 2)); ctx.fillRect(s.x, s.y, s.r, s.r); }
     ctx.globalAlpha = 1;
+    drawScene();
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     if (letters) ctx.drawImage(letters, 0, 0);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);

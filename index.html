@@ -365,7 +365,7 @@ footer p { margin: 4px 0; max-width: 80ch; }
         Поддержать
       </a>
     </div>
-    <p class="meta" id="hero-meta" data-version="2.3"><span class="dl-count" hidden></span>Версия 2.3, установщик 910 КБ. Без установки — <a href="podokonnik.zip" download="Подоконник.zip" style="color:inherit">архивом, 911 КБ</a>.</p>
+    <p class="meta" id="hero-meta" data-version="2.4"><span class="dl-count" hidden></span>Версия 2.4, установщик 913 КБ. Без установки — <a href="podokonnik.zip" download="Подоконник.zip" style="color:inherit">архивом, 930 КБ</a>.</p>
     
   </div>
 </header>
@@ -446,14 +446,15 @@ footer p { margin: 4px 0; max-width: 80ch; }
     </div>
     <div class="shots">
       <div class="tabs" role="tablist" aria-label="Разделы настроек">
-        <button type="button" role="tab" id="t-season" aria-selected="true" aria-controls="shot" data-img="ui-season.webp" data-cap="Сезон: выбор сезона, накопление отдельно на окнах и на панели задач, вызов бульдозера.">Сезон</button>
+        <button type="button" role="tab" id="t-season" aria-selected="true" aria-controls="shot" data-img="ui-season.webp" data-cap="Главная: плитки включают эффекты погоды, сугробы на окнах, питомца, праздники и музыку одним нажатием.">Главная</button>
         <button type="button" role="tab" id="t-wp" aria-selected="false" aria-controls="shot" data-img="ui-wallpapers.webp" data-cap="Живые обои: встроенные видео по сезонам, свои файлы и паки Wallpaper Engine.">Живые обои</button>
-        <button type="button" role="tab" id="t-music" aria-selected="false" aria-controls="shot" data-img="ui-music.webp" data-cap="Музыка: подборки на каждый сезон, своя музыка и ползунок громкости.">Музыка</button>
+        <button type="button" role="tab" id="t-music" aria-selected="false" aria-controls="shot" data-img="ui-music.webp" data-cap="Музыка: подборки на каждый сезон, своя музыка, интернет-радио и таймер сна.">Музыка</button>
+        <button type="button" role="tab" id="t-set" aria-selected="false" aria-controls="shot" data-img="ui-settings.webp" data-cap="Настройки: отдельное меню с вкладками — качество в один клик, автозапуск, обновления, заставка.">Настройки</button>
       </div>
       <figure class="frame" id="shot" role="tabpanel" aria-labelledby="t-season">
-        <img id="shot-img" src="ui-season.webp" width="1280" height="800" alt="Окно настроек Подоконника, раздел «Сезон»">
+        <img id="shot-img" src="ui-season.webp" width="1280" height="800" alt="Окно Подоконника, главная страница">
       </figure>
-      <p class="cap" id="shot-cap">Сезон: выбор сезона, накопление отдельно на окнах и на панели задач, вызов бульдозера.</p>
+      <p class="cap" id="shot-cap">Главная: плитки включают эффекты погоды, сугробы на окнах, питомца, праздники и музыку одним нажатием.</p>
     </div>
   </section>
 
@@ -550,6 +551,10 @@ footer p { margin: 4px 0; max-width: 80ch; }
     <h2 id="h-new">Что нового</h2>
     <div class="faq">
       <details open>
+        <summary>2.4 — понятнее и проще</summary>
+        <p>Новая главная страница: плитки «Эффекты погоды», «Сугробы на окнах», «Питомец», «Праздники», «Музыка» — включаются одним нажатием. Отдельное меню «Настройки» с вкладками: основные, качество (быстрый выбор «Максимум / Сбалансировано / Экономно»), заставка, данные, о программе. Короче меню в трее. Обновления проверяются сразу при запуске, Подоконник сам запускается вместе с Windows. После установки включены только эффекты погоды на максимальном качестве — остальное включается на главной. Кнопка «Сбросить настройки».</p>
+      </details>
+      <details>
         <summary>2.3 — кот, салют, радио и каталог обоев</summary>
         <p>Питомец на подоконнике — кот или снегирь. Новые праздники: Рождество, 8 Марта, Масленица, Пасха и свой праздник с шариками, конфетти, цветами или салютом; салют в полночь на Новый год и по кнопке. Ветер и грозы по погоде. Вечер и ночь на живых обоях, обои по времени суток, каталог бесплатных обоев на сайте. Интернет-радио и таймер сна. Заставка Windows, портативный режим, кнопка «Скопировать журнал», рисование через видеокарту (пробное).</p>
       </details>
@@ -591,7 +596,7 @@ footer p { margin: 4px 0; max-width: 80ch; }
 
 <footer class="wrap">
   <p>Музыка: Kevin MacLeod, incompetech.com, лицензия CC BY 4.0.</p>
-  <p>Видео для обоев: авторы Wikimedia Commons, лицензии CC0, CC BY, CC BY-SA и общественное достояние. Полный список есть в программе, в разделе «Ещё».</p>
+  <p>Видео для обоев: авторы Wikimedia Commons, лицензии CC0, CC BY, CC BY-SA и общественное достояние. Полный список есть в программе: «Настройки» → «О программе».</p>
 </footer>
 
 <script>
@@ -616,7 +621,7 @@ footer p { margin: 4px 0; max-width: 80ch; }
       n.focus(); pick(n);
     });
   });
-  ["ui-wallpapers.webp", "ui-music.webp"].forEach(s => { const i = new Image(); i.src = s; });
+  ["ui-wallpapers.webp", "ui-music.webp", "ui-settings.webp"].forEach(s => { const i = new Image(); i.src = s; });
 
   /* ---------- the window sill ---------- */
   const hero = document.getElementById("hero");

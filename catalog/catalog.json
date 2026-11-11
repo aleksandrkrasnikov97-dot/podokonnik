@@ -1,0 +1,119 @@
+{
+ "version": 1,
+ "items": [
+  {
+   "id": "aurora",
+   "title": "Северное сияние",
+   "title_en": "Northern lights",
+   "season": 0,
+   "kind": "web",
+   "size": 2349,
+   "path": "/podokonnik/catalog/aurora.zip",
+   "thumb": "https://aleksandrkrasnikov97-dot.github.io/podokonnik/catalog/aurora.jpg",
+   "features": [
+    "Реагирует на мышь",
+    "Реагирует на музыку"
+   ],
+   "author": "Подоконник",
+   "license": "CC0"
+  },
+  {
+   "id": "stars",
+   "title": "Звёздное небо",
+   "title_en": "Starry sky",
+   "season": 0,
+   "kind": "web",
+   "size": 2174,
+   "path": "/podokonnik/catalog/stars.zip",
+   "thumb": "https://aleksandrkrasnikov97-dot.github.io/podokonnik/catalog/stars.jpg",
+   "features": [
+    "Реагирует на мышь",
+    "Реагирует на клики",
+    "Реагирует на музыку"
+   ],
+   "author": "Подоконник",
+   "license": "CC0"
+  },
+  {
+   "id": "rain",
+   "title": "Дождь на стекле",
+   "title_en": "Rain on the glass",
+   "season": 3,
+   "kind": "web",
+   "size": 2336,
+   "path": "/podokonnik/catalog/rain.zip",
+   "thumb": "https://aleksandrkrasnikov97-dot.github.io/podokonnik/catalog/rain.jpg",
+   "features": [
+    "Реагирует на мышь",
+    "Реагирует на музыку"
+   ],
+   "author": "Подоконник",
+   "license": "CC0"
+  },
+  {
+   "id": "fireflies",
+   "title": "Светлячки над озером",
+   "title_en": "Fireflies over the lake",
+   "season": 2,
+   "kind": "web",
+   "size": 2504,
+   "path": "/podokonnik/catalog/fireflies.zip",
+   "thumb": "https://aleksandrkrasnikov97-dot.github.io/podokonnik/catalog/fireflies.jpg",
+   "features": [
+    "Реагирует на мышь",
+    "Реагирует на музыку"
+   ],
+   "author": "Подоконник",
+   "license": "CC0"
+  },
+  {
+   "id": "aquarium",
+   "title": "Аквариум",
+   "title_en": "Aquarium",
+   "season": 2,
+   "kind": "web",
+   "size": 2936,
+   "path": "/podokonnik/catalog/aquarium.zip",
+   "thumb": "https://aleksandrkrasnikov97-dot.github.io/podokonnik/catalog/aquarium.jpg",
+   "features": [
+    "Реагирует на мышь",
+    "Реагирует на клики",
+    "Реагирует на музыку"
+   ],
+   "author": "Подоконник",
+   "license": "CC0"
+  },
+  {
+   "id": "synth",
+   "title": "Ретро-закат",
+   "title_en": "Retro sunset",
+   "season": 1,
+   "kind": "web",
+   "size": 2118,
+   "path": "/podokonnik/catalog/synth.zip",
+   "thumb": "https://aleksandrkrasnikov97-dot.github.io/podokonnik/catalog/synth.jpg",
+   "features": [
+    "Реагирует на музыку",
+    "Реагирует на мышь"
+   ],
+   "author": "Подоконник",
+   "license": "CC0"
+  },
+  {
+   "id": "lava",
+   "title": "Лавовая лампа",
+   "title_en": "Lava lamp",
+   "season": 1,
+   "kind": "web",
+   "size": 2062,
+   "path": "/podokonnik/catalog/lava.zip",
+   "thumb": "https://aleksandrkrasnikov97-dot.github.io/podokonnik/catalog/lava.jpg",
+   "features": [
+    "Реагирует на мышь",
+    "Реагирует на музыку"
+   ],
+   "author": "Подоконник",
+   "license": "CC0"
+  }
+ ]
+}

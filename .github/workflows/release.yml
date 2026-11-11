@@ -1,0 +1,27 @@
+name: Release
+# Когда меняется version.json, выкладываем установщик и архив в GitHub Releases:
+# оттуда их скачивают с сайта, и GitHub считает скачивания.
+on:
+  push:
+    branches: [main]
+    paths: [version.json]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          v=$(jq -r .version version.json)
+          notes=$(jq -r .notes version.json)
+          cp podokonnik.zip Podokonnik.zip
+          if gh release view "v$v" >/dev/null 2>&1; then
+            gh release upload "v$v" Podokonnik-Setup.exe Podokonnik.zip --clobber
+          else
+            gh release create "v$v" Podokonnik-Setup.exe Podokonnik.zip --title "Подоконник $v" --notes "Что нового: $notes" --latest
+          fi

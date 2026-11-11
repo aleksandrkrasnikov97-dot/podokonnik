@@ -195,6 +195,9 @@ h1.title {
 .btn-line:hover { border-color: var(--muted); }
 .btn-line svg { width: 17px; height: 17px; color: #ff7a8a; flex: none; }
 .meta { margin: 14px 0 0; font-size: 14px; color: var(--muted); }
+.dl-count { display: inline-flex; align-items: center; gap: 6px; margin-right: 10px; padding: 2px 10px 2px 8px; border-radius: 999px; background: rgba(255,255,255,.1); color: #fff; font-weight: 600; }
+.dl-count svg { width: 14px; height: 14px; }
+.dl-count[hidden] { display: none; }
 .status { min-height: 1.4em; margin: 6px 0 0; font-size: 14px; color: var(--muted); }
 .status.err { color: #ffb3a0; }
 
@@ -362,7 +365,7 @@ footer p { margin: 4px 0; max-width: 80ch; }
         Поддержать
       </a>
     </div>
-    <p class="meta">Версия 2.2, установщик 857 КБ. Без установки — <a href="podokonnik.zip" download="Подоконник.zip" style="color:inherit">архивом, 846 КБ</a>.</p>
+    <p class="meta" id="hero-meta" data-version="2.2"><span class="dl-count" hidden></span>Версия 2.2, установщик 857 КБ. Без установки — <a href="podokonnik.zip" download="Подоконник.zip" style="color:inherit">архивом, 846 КБ</a>.</p>
     
   </div>
 </header>
@@ -1485,5 +1488,48 @@ footer p { margin: 4px 0; max-width: 80ch; }
 })();
 </script>
 
+<script>
+// Сколько раз скачали: GitHub считает скачивания файлов из Releases.
+// Ссылки переключаются на Releases, только если там лежит текущая версия, иначе качается копия с сайта.
+(function () {
+  var meta = document.getElementById('hero-meta');
+  if (!meta || !window.fetch) return;
+  var ver = meta.getAttribute('data-version'), KEY = 'dlstat1';
+  function plural(n) { var a = n % 10, b = n % 100; return (a === 1 && b !== 11) ? 'раз' : (a >= 2 && a <= 4 && (b < 10 || b >= 20)) ? 'раза' : 'раз'; }
+  function apply(d) {
+    if (d.tag === 'v' + ver) {
+      if (d.setup) document.querySelectorAll('a[href="Podokonnik-Setup.exe"]').forEach(function (a) { a.href = d.setup; a.removeAttribute('download'); });
+      if (d.zip) document.querySelectorAll('a[href="podokonnik.zip"]').forEach(function (a) { a.href = d.zip; a.removeAttribute('download'); });
+    }
+    if (d.n > 0) {
+      document.querySelectorAll('.dl-count').forEach(function (el) {
+        el.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 20h16"/></svg>Скачали ' + d.n.toLocaleString('ru-RU') + ' ' + plural(d.n);
+        el.hidden = false;
+      });
+    }
+  }
+  try { var c = JSON.parse(localStorage.getItem(KEY) || 'null'); if (c && Date.now() - c.t < 600000) { apply(c); return; } } catch (e) {}
+  fetch('https://api.github.com/repos/aleksandrkrasnikov97-dot/podokonnik/releases?per_page=100')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (rel) {
+      if (!rel || !rel.length) return;
+      var d = { n: 0, t: Date.now() }, latest = null;
+      rel.forEach(function (x) {
+        if (x.draft) return;
+        if (!latest && !x.prerelease) latest = x;
+        (x.assets || []).forEach(function (a) { if (/setup\.exe$|\.zip$/i.test(a.name)) d.n += a.download_count; });
+      });
+      if (latest) {
+        d.tag = latest.tag_name;
+        (latest.assets || []).forEach(function (a) {
+          if (/setup\.exe$/i.test(a.name)) d.setup = a.browser_download_url;
+          else if (/\.zip$/i.test(a.name)) d.zip = a.browser_download_url;
+        });
+      }
+      try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {}
+      apply(d);
+    }).catch(function () {});
+})();
+</script>
 </body>
 </html>

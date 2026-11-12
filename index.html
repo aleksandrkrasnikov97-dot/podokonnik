@@ -365,7 +365,7 @@ footer p { margin: 4px 0; max-width: 80ch; }
         Поддержать
       </a>
     </div>
-    <p class="meta" id="hero-meta" data-version="2.5"><span class="dl-count" hidden></span>Версия 2.5, установщик 934 КБ. Без установки — <a href="podokonnik.zip" download="Подоконник.zip" style="color:inherit">архивом, 957 КБ</a>.</p>
+    <p class="meta" id="hero-meta" data-version="2.6"><span class="dl-count" hidden></span>Версия 2.6, установщик 2417 КБ. Без установки — <a href="podokonnik.zip" download="Подоконник.zip" style="color:inherit">архивом, 2433 КБ</a>.</p>
     
   </div>
 </header>
@@ -450,6 +450,7 @@ footer p { margin: 4px 0; max-width: 80ch; }
         <button type="button" role="tab" id="t-pet" aria-selected="false" aria-controls="shot" data-img="ui-pet.webp" data-cap="Питомец: конструктор с живым предпросмотром — готовые питомцы, части тела, цвета, имя и характер.">Питомец</button>
         <button type="button" role="tab" id="t-wp" aria-selected="false" aria-controls="shot" data-img="ui-wallpapers.webp" data-cap="Живые обои: встроенные видео по сезонам, свои файлы и паки Wallpaper Engine.">Живые обои</button>
         <button type="button" role="tab" id="t-music" aria-selected="false" aria-controls="shot" data-img="ui-music.webp" data-cap="Музыка: подборки на каждый сезон, своя музыка, интернет-радио и таймер сна.">Музыка</button>
+        <button type="button" role="tab" id="t-tray" aria-selected="false" aria-controls="shot" data-img="ui-tray.webp" data-cap="Меню в трее: эффекты, сезоны, музыка и радио, обои — в один клик у часов.">Меню в трее</button>
         <button type="button" role="tab" id="t-set" aria-selected="false" aria-controls="shot" data-img="ui-settings.webp" data-cap="Настройки: отдельное меню с вкладками — качество в один клик, автозапуск, обновления, заставка.">Настройки</button>
       </div>
       <figure class="frame" id="shot" role="tabpanel" aria-labelledby="t-season">
@@ -552,6 +553,10 @@ footer p { margin: 4px 0; max-width: 80ch; }
     <h2 id="h-new">Что нового</h2>
     <div class="faq">
       <details open>
+        <summary>2.6 — новые питомцы и меню в трее</summary>
+        <p>Питомцы теперь собираются из картинок в простом плоском стиле: головы, туловища, лапы, хвосты, уши, глаза и украшения нарисованы отдельно и перекрашиваются в любые цвета из конструктора. Правый клик по значку в трее открывает новую панель: эффекты погоды и сезоны, музыка (тишина, мелодии или радио) с переключением станций и громкостью, живые обои, быстрые кнопки питомца, праздников и сугробов. Станции радио можно листать кнопками ◀ ▶ и в окне программы.</p>
+      </details>
+      <details>
         <summary>2.5 — собери своего питомца</summary>
         <p>Отдельная вкладка «Питомец» с конструктором: зверёк или птичка, тело, мордочка, уши, хвост, глаза, узор, украшения (бантик, ошейник, шапка, шарф, корона), любые цвета, имя, размер и характер — спокойный, игривый или соня. 14 готовых питомцев: коты, корги, далматинец, хаски, лиса, кролик, мишка, снегирь, синичка, воробей, попугайчик — и кнопка «Случайный питомец». Питомец больше не пропадает, когда выключены эффекты погоды или сугробы на окнах, а праздничные гирлянды теперь висят на окнах и без сугробов.</p>
       </details>
@@ -626,7 +631,7 @@ footer p { margin: 4px 0; max-width: 80ch; }
       n.focus(); pick(n);
     });
   });
-  ["ui-pet.webp", "ui-wallpapers.webp", "ui-music.webp", "ui-settings.webp"].forEach(s => { const i = new Image(); i.src = s; });
+  ["ui-pet.webp", "ui-wallpapers.webp", "ui-music.webp", "ui-settings.webp", "ui-tray.webp"].forEach(s => { const i = new Image(); i.src = s; });
 
   /* ---------- the window sill ---------- */
   const hero = document.getElementById("hero");

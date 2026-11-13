@@ -1,0 +1,39 @@
+name: Stats
+# Счётчик скачиваний для сайта. Раньше страница спрашивала GitHub API прямо из браузера посетителя,
+# а там не больше 60 запросов в час на один IP — у мобильного интернета и общих сетей лимит кончается,
+# и счётчик пропадал. Теперь раз в полчаса (и после каждого релиза) число считает GitHub Actions
+# и кладёт stats.json в ветку stats; сайт читает его через raw.githubusercontent.com.
+on:
+  schedule:
+    - cron: '17,47 * * * *'
+  workflow_run:
+    workflows: [Release]
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Count downloads
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${{ github.repository }}/releases?per_page=100" > rel.json
+          jq '{
+            n: ([.[] | select(.draft | not) | .assets[] | select(.name | test("setup\\.exe$|\\.zip$"; "i")) | .download_count] | add // 0),
+            tag: ([.[] | select((.draft | not) and (.prerelease | not))][0].tag_name),
+            setup: ([.[] | select((.draft | not) and (.prerelease | not))][0].assets[] | select(.name | test("setup\\.exe$"; "i")) | .browser_download_url),
+            zip: ([.[] | select((.draft | not) and (.prerelease | not))][0].assets[] | select(.name | test("\\.zip$"; "i")) | .browser_download_url),
+            updated: (now | todate)
+          }' rel.json > stats.json
+          cat stats.json
+      - name: Save to branch stats
+        run: |
+          mkdir out && cd out
+          git init -q -b stats
+          cp ../stats.json .
+          git add stats.json
+          git -c user.name=github-actions -c user.email=github-actions@users.noreply.github.com commit -q -m "stats"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" stats

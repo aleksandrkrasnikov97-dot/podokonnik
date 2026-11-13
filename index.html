@@ -1563,27 +1563,38 @@ footer p { margin: 4px 0; max-width: 80ch; }
       });
     }
   }
-  try { var c = JSON.parse(localStorage.getItem(KEY) || 'null'); if (c && Date.now() - c.t < 600000) { apply(c); return; } } catch (e) {}
-  fetch('https://api.github.com/repos/aleksandrkrasnikov97-dot/podokonnik/releases?per_page=100')
-    .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (rel) {
-      if (!rel || !rel.length) return;
-      var d = { n: 0, t: Date.now() }, latest = null;
-      rel.forEach(function (x) {
-        if (x.draft) return;
-        if (!latest && !x.prerelease) latest = x;
-        (x.assets || []).forEach(function (a) { if (/setup\.exe$|\.zip$/i.test(a.name)) d.n += a.download_count; });
-      });
-      if (latest) {
-        d.tag = latest.tag_name;
-        (latest.assets || []).forEach(function (a) {
-          if (/setup\.exe$/i.test(a.name)) d.setup = a.browser_download_url;
-          else if (/\.zip$/i.test(a.name)) d.zip = a.browser_download_url;
+  // число считает GitHub Actions (ветка stats); запасной путь — GitHub API, у которого лимит 60 запросов в час на IP;
+  // если не вышло ни то ни другое — показываем последнее известное число
+  var cached = null;
+  try { cached = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+  if (cached && Date.now() - cached.t < 600000) { apply(cached); return; }
+  function save(d) { d.t = Date.now(); try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} apply(d); }
+  function fromApi() {
+    return fetch('https://api.github.com/repos/aleksandrkrasnikov97-dot/podokonnik/releases?per_page=100')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (rel) {
+        if (!rel || !rel.length) return null;
+        var d = { n: 0 }, latest = null;
+        rel.forEach(function (x) {
+          if (x.draft) return;
+          if (!latest && !x.prerelease) latest = x;
+          (x.assets || []).forEach(function (a) { if (/setup\.exe$|\.zip$/i.test(a.name)) d.n += a.download_count; });
         });
-      }
-      try { localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {}
-      apply(d);
-    }).catch(function () {});
+        if (latest) {
+          d.tag = latest.tag_name;
+          (latest.assets || []).forEach(function (a) {
+            if (/setup\.exe$/i.test(a.name)) d.setup = a.browser_download_url;
+            else if (/\.zip$/i.test(a.name)) d.zip = a.browser_download_url;
+          });
+        }
+        return d;
+      });
+  }
+  fetch('https://raw.githubusercontent.com/aleksandrkrasnikov97-dot/podokonnik/stats/stats.json?t=' + Math.floor(Date.now() / 300000))
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) { return d && d.n > 0 ? d : fromApi(); }, fromApi)
+    .then(function (d) { if (d && d.n > 0) save(d); else if (cached) apply(cached); })
+    .catch(function () { if (cached) apply(cached); });
 })();
 </script>
 </body>

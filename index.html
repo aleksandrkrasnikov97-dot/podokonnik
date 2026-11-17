@@ -454,6 +454,7 @@ footer p { margin: 4px 0; max-width: 80ch; }
         <button type="button" role="tab" id="t-season" aria-selected="true" aria-controls="shot" data-img="ui-season.webp" data-cap="Главная: плитки включают эффекты погоды, сугробы на окнах, питомца, праздники и музыку одним нажатием.">Главная</button>
         <button type="button" role="tab" id="t-pet" aria-selected="false" aria-controls="shot" data-img="ui-pet.webp" data-cap="Питомец: конструктор с живым предпросмотром — готовые питомцы, части тела, цвета, имя и характер.">Питомец</button>
         <button type="button" role="tab" id="t-wp" aria-selected="false" aria-controls="shot" data-img="ui-wallpapers.webp" data-cap="Живые обои: встроенные видео по сезонам, свои файлы и паки Wallpaper Engine.">Живые обои</button>
+        <button type="button" role="tab" id="t-cur" aria-selected="false" aria-controls="shot" data-img="ui-cursors.webp" data-cap="Курсоры: больше 11 тысяч наборов для всей Windows — 60 отобранных по разделам и библиотека rw-designer.com с поиском, размер курсора, курсор по сезону и след за мышкой.">Курсоры</button>
         <button type="button" role="tab" id="t-music" aria-selected="false" aria-controls="shot" data-img="ui-music.webp" data-cap="Музыка: подборки на каждый сезон, своя музыка, интернет-радио и таймер сна.">Музыка</button>
         <button type="button" role="tab" id="t-tray" aria-selected="false" aria-controls="shot" data-img="ui-tray.webp" data-cap="Меню в трее: эффекты, сезоны, музыка и радио, обои — в один клик у часов.">Меню в трее</button>
         <button type="button" role="tab" id="t-set" aria-selected="false" aria-controls="shot" data-img="ui-settings.webp" data-cap="Настройки: отдельное меню с вкладками — качество в один клик, автозапуск, обновления, заставка.">Настройки</button>
@@ -681,7 +682,7 @@ footer p { margin: 4px 0; max-width: 80ch; }
       n.focus(); pick(n);
     });
   });
-  ["ui-pet.webp", "ui-wallpapers.webp", "ui-music.webp", "ui-settings.webp", "ui-tray.webp"].forEach(s => { const i = new Image(); i.src = s; });
+  ["ui-pet.webp", "ui-wallpapers.webp", "ui-cursors.webp", "ui-music.webp", "ui-settings.webp", "ui-tray.webp"].forEach(s => { const i = new Image(); i.src = s; });
 
   /* ---------- the window sill ---------- */
   const hero = document.getElementById("hero");

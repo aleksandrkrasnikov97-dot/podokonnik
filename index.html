@@ -9,7 +9,7 @@
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://aleksandrkrasnikov97-dot.github.io/podokonnik/">
 <!-- коды подтверждения Google Search Console и Яндекс Вебмастера -->
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Подоконник", "alternateName": ["Podokonnik", "Подоконник для Windows"], "description": "Бесплатная программа для Windows: снег, листья и лепестки падают поверх окон и копятся на них. Четыре сезона, живые обои (в том числе сцены Wallpaper Engine), музыка, радио и питомец на рабочем столе.", "applicationCategory": "DesktopEnhancementApplication", "operatingSystem": "Windows 10, Windows 11", "softwareVersion": "4.0", "inLanguage": ["ru", "en"], "url": "https://aleksandrkrasnikov97-dot.github.io/podokonnik/", "downloadUrl": "https://github.com/aleksandrkrasnikov97-dot/podokonnik/releases/latest", "image": "https://aleksandrkrasnikov97-dot.github.io/podokonnik/preview.jpg", "screenshot": "https://aleksandrkrasnikov97-dot.github.io/podokonnik/preview.jpg", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "RUB"}, "author": {"@type": "Person", "name": "Александр Красников"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Подоконник", "alternateName": ["Podokonnik", "Подоконник для Windows"], "description": "Бесплатная программа для Windows: снег, листья и лепестки падают поверх окон и копятся на них. Четыре сезона, живые обои (в том числе сцены Wallpaper Engine), музыка, радио и питомец на рабочем столе.", "applicationCategory": "DesktopEnhancementApplication", "operatingSystem": "Windows 10, Windows 11", "processorRequirements": "64-бит, 2 ядра (рекомендуется 4)", "memoryRequirements": "4 ГБ (рекомендуется 8 ГБ)", "storageRequirements": "200 МБ (рекомендуется 2 ГБ)", "softwareVersion": "4.0", "inLanguage": ["ru", "en"], "url": "https://aleksandrkrasnikov97-dot.github.io/podokonnik/", "downloadUrl": "https://github.com/aleksandrkrasnikov97-dot/podokonnik/releases/latest", "image": "https://aleksandrkrasnikov97-dot.github.io/podokonnik/preview.jpg", "screenshot": "https://aleksandrkrasnikov97-dot.github.io/podokonnik/preview.jpg", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "RUB"}, "author": {"@type": "Person", "name": "Александр Красников"}}</script>
 <meta property="og:type" content="website">
 <meta property="og:title" content="Подоконник для Windows">
 <meta property="og:description" content="Снег, листья и лепестки падают поверх окон и копятся на них, как на настоящем подоконнике. Бесплатно.">
@@ -284,6 +284,15 @@ ol.steps li::marker { font-weight: 700; color: var(--lamp); }
 .faq details p { margin: 8px 0 0; color: var(--muted); }
 .req { margin: 0; padding-left: 1.15em; }
 .req li { margin: 4px 0; }
+.sysreq { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0 26px; }
+.sysreq > div { border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; background: rgba(255,255,255,.025); }
+.sysreq h3 { margin: 0 0 10px; font-size: 16px; }
+.sysreq > div:last-child h3 { color: var(--lamp); }
+.sysreq dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 7px 14px; font-size: 15px; }
+.sysreq dt { color: var(--muted); }
+.sysreq dd { margin: 0; }
+.sysreq-note { margin: -12px 0 26px; font-size: 14px; color: var(--muted); }
+@media (max-width: 760px) { .sysreq { grid-template-columns: 1fr; } }
 
 .get-block { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 22px; }
 .small-btn {
@@ -521,11 +530,36 @@ footer p { margin: 4px 0; max-width: 80ch; }
     <h2 id="h-install">Как установить</h2>
     <ol class="steps">
       <li>Скачай установщик и запусти его. Права администратора не нужны, ярлык появится в «Пуске».</li>
-      <li>Или скачай архив без установки, распакуй папку «Подоконник» куда удобно и запусти Подоконник.exe. Он должен лежать в одной папке с WebView2Loader.dll.</li>
+      <li>Или скачай архив без установки, распакуй папку «Подоконник» куда удобно и запусти Подоконник.exe.</li>
       <li>Найди окошко в трее возле часов. Левый клик открывает настройки, правый показывает быстрое меню.</li>
     </ol>
     <p>Новые версии программа находит сама: когда выйдет обновление, в настройках появится кнопка «Обновить». Скачивать заново не нужно. Удалить программу можно в «Параметры → Приложения», как любую другую.</p>
-    <p>Нужна Windows 10 или 11 (64-бит) и Microsoft Edge WebView2. В Windows 11 он уже встроен, в Windows 10 обычно тоже есть. Интернет нужен только чтобы скачать музыку и выбранные видео. Работает на нескольких мониторах и с любым масштабом экрана.</p>
+    <h3 id="h-req">Системные требования</h3>
+    <div class="sysreq">
+      <div>
+        <h3>Минимальные</h3>
+        <dl>
+          <dt>Система</dt><dd>Windows 10 (64-бит)</dd>
+          <dt>Процессор</dt><dd>2 ядра, 64-бит</dd>
+          <dt>Память</dt><dd>4 ГБ</dd>
+          <dt>Видеокарта</dt><dd>с DirectX 11, подойдёт встроенная (Intel HD Graphics 4000, AMD Radeon R5 и новее)</dd>
+          <dt>Место</dt><dd>200 МБ</dd>
+          <dt>Компонент</dt><dd>Microsoft Edge WebView2 — в Windows 11 встроен, в Windows 10 обычно уже есть</dd>
+        </dl>
+      </div>
+      <div>
+        <h3>Рекомендуемые</h3>
+        <dl>
+          <dt>Система</dt><dd>Windows 11 или Windows 10 22H2</dd>
+          <dt>Процессор</dt><dd>4 ядра: Intel Core i5, AMD Ryzen 5 и новее</dd>
+          <dt>Память</dt><dd>8 ГБ</dd>
+          <dt>Видеокарта</dt><dd>Intel UHD 620 / Iris Xe, AMD Radeon Vega, NVIDIA GeForce GTX 950 и новее</dd>
+          <dt>Место</dt><dd>2 ГБ — для скачанных живых обоев и музыки</dd>
+          <dt>Интернет</dt><dd>для каталога и обоев сообщества, музыки, радио и курсоров</dd>
+        </dl>
+      </div>
+    </div>
+    <p class="sysreq-note">Снег, листья и лепестки идут и на минимальных требованиях. Рекомендуемые нужны для живых обоев, сцен Wallpaper Engine и эффектов в Студии Подоконника. Работает на нескольких мониторах и с любым масштабом экрана.</p>
     <div class="faq">
       <details>
         <summary>Windows пишет «Система Windows защитила ваш компьютер»</summary>
@@ -549,8 +583,8 @@ footer p { margin: 4px 0; max-width: 80ch; }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 20h16"/></svg>
         Скачать установщик
       </a>
-      <a class="small-btn" href="podokonnik.zip" download="Подоконник.zip">Архив без установки, 911 КБ</a>
-      <a class="small-btn" href="podokonnik-source.zip" download="Подоконник — исходный код.zip">Исходный код, 597 КБ</a>
+      <a class="small-btn" href="podokonnik.zip" download="Подоконник.zip">Архив без установки, 4098 КБ</a>
+      <a class="small-btn" href="podokonnik-source.zip" download="Подоконник — исходный код.zip">Исходный код, 10 МБ</a>
     </div>
     
   </section>

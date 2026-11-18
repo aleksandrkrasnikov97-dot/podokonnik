@@ -1,92 +1,43 @@
 name: Community
-# Обои сообщества.
-# deploy — выкладывает сервер (папка community/) в Cloudflare Workers, когда он меняется.
-# sync — каждые 15 минут переносит новые обои с сервера в релизы community-N этого репозитория
-#        (там места почти без ограничений), удаляет с GitHub то, что удалил модератор,
-#        и кладёт запасной список обоев community.json в ветку community.
+# Обои сообщества. Сервер — Cloudflare Worker из папки community/ (адрес ниже).
+# Каждые 15 минут: новые обои переезжают с сервера в релизы community-N этого репозитория
+# (там места почти без ограничений, и GitHub открывается там, где Cloudflare плохо доступен),
+# с GitHub убирается то, что удалил модератор, а в ветку community кладётся запасной список community.json.
+# Сервер узнаёт этот репозиторий по OIDC-токену GitHub — секретов не нужно.
 on:
-  push:
-    branches: [main]
-    paths: ['community/**', '.github/workflows/community.yml']
   schedule:
     - cron: '7,22,37,52 * * * *'
   workflow_dispatch:
 permissions:
   contents: write
+  id-token: write
 concurrency:
   group: community
   cancel-in-progress: false
-# Единственный секрет репозитория — CLOUDFLARE_API_TOKEN. Ключи модератора, синхронизации и «соль»
-# для обезличивания IP выводятся из него (sha256), поэтому отдельно их хранить не нужно.
 env:
-  CF: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  API: https://podokonnik.aleksandrkrasnikov97.workers.dev
+  GH_TOKEN: ${{ github.token }}
+  REPO: ${{ github.repository }}
 jobs:
-  deploy:
-    if: github.event_name != 'schedule'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Keys
-        run: |
-          for k in mod sync salt; do v=$(printf '%s' "podokonnik-$k:$CF" | sha256sum | cut -c1-48); echo "::add-mask::$v"; echo "KEY_$k=$v" >> "$GITHUB_ENV"; done
-      - name: Cloudflare account and workers.dev address
-        run: |
-          set -e
-          acc=$(curl -s -H "Authorization: Bearer $CF" "https://api.cloudflare.com/client/v4/accounts?per_page=5" | jq -r '.result[0].id // empty')
-          [ -n "$acc" ] || { echo "::error::Ключ Cloudflare не видит аккаунт — проверь права ключа"; exit 1; }
-          echo "CLOUDFLARE_ACCOUNT_ID=$acc" >> "$GITHUB_ENV"
-          sub=$(curl -s -H "Authorization: Bearer $CF" "https://api.cloudflare.com/client/v4/accounts/$acc/workers/subdomain" | jq -r '.result.subdomain // empty')
-          if [ -z "$sub" ]; then
-            for s in podokonnik podokonnik-app podokonnik-wall "podokonnik-$RANDOM"; do
-              r=$(curl -s -X PUT -H "Authorization: Bearer $CF" -H 'Content-Type: application/json' \
-                  -d "{\"subdomain\":\"$s\"}" "https://api.cloudflare.com/client/v4/accounts/$acc/workers/subdomain")
-              if [ "$(echo "$r" | jq -r .success)" = true ]; then sub=$s; break; fi
-              echo "$r"
-            done
-          fi
-          echo "Адрес сервера: https://community.$sub.workers.dev"
-      - name: Deploy
-        working-directory: community
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        run: |
-          set -e
-          npx --yes wrangler@4 deploy
-          jq -n --arg m "$KEY_mod" --arg s "$KEY_sync" --arg i "$KEY_salt" '{MOD_KEY:$m, SYNC_KEY:$s, IP_SALT:$i}' > /tmp/sec.json
-          npx --yes wrangler@4 secret bulk /tmp/sec.json
-          rm -f /tmp/sec.json
-
   sync:
-    needs: deploy
-    if: always() && needs.deploy.result != 'failure'
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ github.token }}
-      REPO: ${{ github.repository }}
     steps:
-      - name: Keys
-        run: |
-          for k in mod sync salt; do v=$(printf '%s' "podokonnik-$k:$CF" | sha256sum | cut -c1-48); echo "::add-mask::$v"; echo "KEY_$k=$v" >> "$GITHUB_ENV"; done
-      - name: Server address
-        run: |
-          set -e
-          acc=$(curl -s -H "Authorization: Bearer $CF" "https://api.cloudflare.com/client/v4/accounts?per_page=5" | jq -r '.result[0].id')
-          sub=$(curl -s -H "Authorization: Bearer $CF" "https://api.cloudflare.com/client/v4/accounts/$acc/workers/subdomain" | jq -r '.result.subdomain')
-          echo "API=https://community.$sub.workers.dev" >> "$GITHUB_ENV"
       - name: Move new wallpapers to GitHub, remove deleted ones
         run: |
           set -e
-          sleep 5
-          curl -sf -H "X-Sync-Key: $KEY_sync" "$API/api/sync/pending" > pending.json
-          cat pending.json
-          gh api "repos/$REPO/releases?per_page=100" --paginate | jq -s 'add | map(select(.tag_name | startswith("community-")))' > rel.json
+          tok() { curl -sf -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=podokonnik-community" | jq -r .value; }
+          api() { curl -sf -H "Authorization: Bearer $(tok)" -H 'Content-Type: application/json' "$@"; }
+          api "$API/api/sync/pending" > pending.json
+          cat pending.json; echo
+          rels() { gh api "repos/$REPO/releases?per_page=100" --paginate | jq -s 'add | map(select(.tag_name | startswith("community-")))' > rel.json; }
+          rels
           pick() {   # релиз, где ещё есть место (до 1000 файлов в релизе)
             t=$(jq -r 'map(select((.assets | length) < 990)) | sort_by(.tag_name | ltrimstr("community-") | tonumber) | last | .tag_name // empty' rel.json)
             if [ -z "$t" ]; then
               n=$(jq -r 'map(.tag_name | ltrimstr("community-") | tonumber) | max // 0' rel.json); n=$((n + 1)); t="community-$n"
               gh release create "$t" --repo "$REPO" --prerelease --title "Обои сообщества $n" \
-                --notes "Обои, которые выложили пользователи Подоконника. Смотреть и ставить — в программе: Живые обои → Сообщество."
-              gh api "repos/$REPO/releases?per_page=100" --paginate | jq -s 'add | map(select(.tag_name | startswith("community-")))' > rel.json
+                --notes "Обои, которые выложили пользователи Подоконника. Смотреть и ставить — в программе: Живые обои → Сообщество." >/dev/null
+              rels
             fi
             echo "$t"
           }
@@ -95,24 +46,21 @@ jobs:
             t=$(pick)
             gh release upload "$t" "$id.zip" "$id.jpg" --repo "$REPO" --clobber
             base="https://github.com/$REPO/releases/download/$t"
-            curl -sf -X POST -H "X-Sync-Key: $KEY_sync" -H 'Content-Type: application/json' \
-              -d "{\"id\":\"$id\",\"file\":\"$base/$id.zip\",\"preview\":\"$base/$id.jpg\"}" "$API/api/sync/done"
-            echo
+            api -X POST -d "{\"id\":\"$id\",\"file\":\"$base/$id.zip\",\"preview\":\"$base/$id.jpg\"}" "$API/api/sync/done"; echo
             rm -f "$id.zip" "$id.jpg"
-            gh api "repos/$REPO/releases?per_page=100" --paginate | jq -s 'add | map(select(.tag_name | startswith("community-")))' > rel.json
+            rels
           done
           for id in $(jq -r '.purge[]' pending.json); do
             for t in $(jq -r --arg z "$id.zip" 'map(select(any(.assets[]; .name == $z))) | .[].tag_name' rel.json); do
               gh release delete-asset "$t" "$id.zip" --repo "$REPO" -y || true
               gh release delete-asset "$t" "$id.jpg" --repo "$REPO" -y || true
             done
-            curl -sf -X POST -H "X-Sync-Key: $KEY_sync" -H 'Content-Type: application/json' -d "{\"id\":\"$id\"}" "$API/api/sync/purged"
-            echo
+            api -X POST -d "{\"id\":\"$id\"}" "$API/api/sync/purged"; echo
           done
+          api "$API/api/sync/catalog" > community.json
       - name: Spare list for the app (branch community)
         run: |
           set -e
-          curl -sf -H "X-Sync-Key: $KEY_sync" "$API/api/sync/catalog" > community.json
           mkdir out && cd out
           git init -q -b community
           cp ../community.json .

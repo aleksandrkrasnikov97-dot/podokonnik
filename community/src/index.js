@@ -7,12 +7,18 @@
 //   GET  /f/:id.zip | /f/:id.jpg — файл (пока он не перенесён на GitHub)
 //   POST /api/dl/:id            — +1 скачивание
 //   POST /api/report/:id        {reason} — жалоба (одна от человека на обои)
+// Секретов в настройках сервера нет: ключ модератора проверяется по его sha256 (MOD_KEY_SHA256 ниже),
+// GitHub Actions подтверждает себя OIDC-токеном GitHub, «соль» для IP сервер придумывает сам.
 // Модератор (заголовок X-Mod-Key):
 //   GET  /api/mod/check, GET /api/mod/list?filter=reported|hidden|all
 //   POST /api/mod/delete/:id, /api/mod/ban/:id (удалить и запретить автору загрузки), /api/mod/keep/:id (снять жалобы)
-// GitHub Actions (заголовок X-Sync-Key):
+// GitHub Actions (заголовок Authorization: Bearer <OIDC-токен этого репозитория>):
 //   GET /api/sync/pending, POST /api/sync/done {id, file, preview}, POST /api/sync/purged {id}, GET /api/sync/catalog
 
+const MOD_KEY_SHA256 = "ffab344faea7f6d040d2554192c31cfdb8364edaef277b655f45de2bef0258eb";
+const GH_REPO = "aleksandrkrasnikov97-dot/podokonnik";
+const OIDC_ISS = "https://token.actions.githubusercontent.com";
+const OIDC_AUD = "podokonnik-community";
 const MAX_FILE = 90 * 1024 * 1024;     // тело запроса на бесплатном плане — до 100 МБ
 const MAX_PREVIEW = 600 * 1024;
 const CHUNK = 1024 * 1024;             // значение в SQLite Durable Object — до 2 МБ
@@ -93,7 +99,35 @@ export class Hub {
       CREATE TABLE IF NOT EXISTS reports (item TEXT, iph TEXT, reason TEXT, at INTEGER, PRIMARY KEY (item, iph));
       CREATE TABLE IF NOT EXISTS dls (item TEXT, iph TEXT, PRIMARY KEY (item, iph));
       CREATE TABLE IF NOT EXISTS bans (iph TEXT PRIMARY KEY, at INTEGER);
+      CREATE TABLE IF NOT EXISTS meta (k TEXT PRIMARY KEY, v TEXT);
     `);
+    let salt = this.one("SELECT v FROM meta WHERE k = 'salt'");
+    if (!salt) {
+      salt = { v: rid(32) };
+      this.sql.exec("INSERT INTO meta VALUES ('salt', ?)", salt.v);
+    }
+    this.salt = salt.v;
+    this.jwks = null;
+  }
+
+  async isGithub(request) {
+    const m = /^Bearer (.+)$/.exec(request.headers.get("Authorization") || "");
+    if (!m) return false;
+    const parts = m[1].split(".");
+    if (parts.length !== 3) return false;
+    const dec = s => Uint8Array.from(atob(s.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((s.length + 3) % 4)), c => c.charCodeAt(0));
+    let head, body;
+    try { head = JSON.parse(new TextDecoder().decode(dec(parts[0]))); body = JSON.parse(new TextDecoder().decode(dec(parts[1]))); } catch { return false; }
+    const now = Date.now() / 1000;
+    if (head.alg !== "RS256" || body.iss !== OIDC_ISS || body.aud !== OIDC_AUD || body.repository !== GH_REPO || !(body.exp > now) || !(body.nbf ? body.nbf < now + 60 : true)) return false;
+    for (let attempt = 0; attempt < 2; attempt++) {
+      if (!this.jwks || attempt) this.jwks = (await (await fetch(OIDC_ISS + "/.well-known/jwks")).json()).keys || [];
+      const jwk = this.jwks.find(k => k.kid === head.kid);
+      if (!jwk) continue;
+      const key = await crypto.subtle.importKey("jwk", jwk, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["verify"]);
+      return crypto.subtle.verify("RSASSA-PKCS1-v1_5", key, dec(parts[2]), new TextEncoder().encode(parts[0] + "." + parts[1]));
+    }
+    return false;
   }
 
   rows(q, ...a) { return [...this.sql.exec(q, ...a)]; }
@@ -112,7 +146,7 @@ export class Hub {
     const p = url.pathname.split("/").filter(Boolean);   // ["api","list"] / ["f","id.zip"]
     const m = request.method;
     const ip = request.headers.get("CF-Connecting-IP") || "local";
-    const iph = await sha256((this.env.IP_SALT || "salt") + ip);
+    const iph = await sha256(this.salt + ip);
     const base = url.origin;
 
     if (p[0] === "f" && m === "GET") return this.file(p[1] || "");
@@ -129,11 +163,11 @@ export class Hub {
     if (a === "report" && m === "POST" && id) return this.report(request, id, iph);
 
     if (a === "mod") {
-      if (!same(request.headers.get("X-Mod-Key") || "", this.env.MOD_KEY || "")) return fail(403, "not_moderator");
+      if (!same(await sha256(request.headers.get("X-Mod-Key") || ""), MOD_KEY_SHA256)) return fail(403, "not_moderator");
       return this.mod(m, p[2], p[3], url, base);
     }
     if (a === "sync") {
-      if (!same(request.headers.get("X-Sync-Key") || "", this.env.SYNC_KEY || "")) return fail(403, "forbidden");
+      if (!(await this.isGithub(request))) return fail(403, "forbidden");
       return this.sync(m, p[2], request, base);
     }
     return fail(404, "not_found");

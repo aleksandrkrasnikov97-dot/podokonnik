@@ -2,7 +2,7 @@
 # Список, жалобы и только что загруженные файлы хранит один Durable Object с SQLite.
 # Раз в 15 минут GitHub Actions (.github/workflows/community.yml) переносит файлы
 # в релизы этого репозитория (community-1, community-2, …) и удаляет их отсюда.
-name = "community"
+name = "podokonnik"
 main = "src/index.js"
 compatibility_date = "2025-09-01"
 workers_dev = true

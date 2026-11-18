@@ -101,6 +101,8 @@ export class Hub {
       CREATE TABLE IF NOT EXISTS bans (iph TEXT PRIMARY KEY, at INTEGER);
       CREATE TABLE IF NOT EXISTS meta (k TEXT PRIMARY KEY, v TEXT);
     `);
+    if (!this.rows("PRAGMA table_info(items)").some(c => c.name === "official"))
+      this.sql.exec("ALTER TABLE items ADD COLUMN official INTEGER DEFAULT 0");   // обои создателя Подоконника
     let salt = this.one("SELECT v FROM meta WHERE k = 'salt'");
     if (!salt) {
       salt = { v: rid(32) };
@@ -130,6 +132,11 @@ export class Hub {
     return false;
   }
 
+  async isMod(request) {
+    const k = request.headers.get("X-Mod-Key");
+    return !!k && same(await sha256(k), MOD_KEY_SHA256);
+  }
+
   rows(q, ...a) { return [...this.sql.exec(q, ...a)]; }
   one(q, ...a) { return this.rows(q, ...a)[0]; }
 
@@ -153,7 +160,7 @@ export class Hub {
     const a = p[1], id = p[2];
 
     if (a === "list" && m === "GET") return this.list(url, base);
-    if (a === "upload" && m === "POST") return this.uploadStart(request, iph);
+    if (a === "upload" && m === "POST") return this.uploadStart(request, iph, await this.isMod(request));
     if (a === "upload" && m === "PUT" && id) return this.uploadBody(request, id, url.searchParams.get("t"));
     if (a === "dl" && m === "POST" && id) {
       const r = this.sql.exec("INSERT OR IGNORE INTO dls VALUES (?, ?)", id, iph);
@@ -163,7 +170,7 @@ export class Hub {
     if (a === "report" && m === "POST" && id) return this.report(request, id, iph);
 
     if (a === "mod") {
-      if (!same(await sha256(request.headers.get("X-Mod-Key") || ""), MOD_KEY_SHA256)) return fail(403, "not_moderator");
+      if (!(await this.isMod(request))) return fail(403, "not_moderator");
       return this.mod(m, p[2], p[3], url, base);
     }
     if (a === "sync") {
@@ -177,6 +184,7 @@ export class Hub {
     const o = {
       id: r.id, title: r.title, author: r.author, kind: r.kind, size: r.size, created: r.created,
       downloads: r.downloads,
+      official: !!r.official,
       preview: r.gh_preview || `${base}/f/${r.id}.jpg`,
       file: r.gh_file || `${base}/f/${r.id}.zip`,
     };
@@ -202,11 +210,11 @@ export class Hub {
     return json({ ok: true, total, items });
   }
 
-  async uploadStart(request, iph) {
-    if (this.one("SELECT 1 x FROM bans WHERE iph = ?", iph)) return fail(403, "banned");
+  async uploadStart(request, iph, official) {
+    if (!official && this.one("SELECT 1 x FROM bans WHERE iph = ?", iph)) return fail(403, "banned");
     this.cleanupStale();
     const day = Date.now() - 86400000;
-    if (this.one("SELECT COUNT(*) n FROM items WHERE iph = ? AND created > ?", iph, day).n >= UPLOADS_PER_DAY) return fail(429, "too_many");
+    if (!official && this.one("SELECT COUNT(*) n FROM items WHERE iph = ? AND created > ?", iph, day).n >= UPLOADS_PER_DAY) return fail(429, "too_many");
     let b;
     try { b = await request.json(); } catch { return fail(400, "bad_json"); }
     const title = clean(b.title, 80), author = clean(b.author, 40) || "Аноним";
@@ -219,8 +227,8 @@ export class Hub {
     let id;
     do id = rid(); while (this.one("SELECT 1 x FROM items WHERE id = ?", id));
     const token = rid(24);
-    this.sql.exec("INSERT INTO items (id, title, author, kind, size, created, status, iph, token) VALUES (?, ?, ?, ?, ?, ?, 'uploading', ?, ?)",
-      id, title, author, kind, size, Date.now(), iph, token);
+    this.sql.exec("INSERT INTO items (id, title, author, kind, size, created, status, iph, token, official) VALUES (?, ?, ?, ?, ?, ?, 'uploading', ?, ?, ?)",
+      id, title, author, kind, size, Date.now(), iph, token, official ? 1 : 0);
     this.sql.exec("INSERT INTO blobs VALUES (?, 0, ?)", id + ".jpg", prev);
     return json({ ok: true, id, token, max: MAX_FILE });
   }
@@ -347,6 +355,10 @@ export class Hub {
       this.sql.exec("DELETE FROM reports WHERE item = ?", id);
       this.sql.exec("UPDATE items SET reports = 0, status = CASE WHEN status = 'hidden' THEN 'visible' ELSE status END WHERE id = ?", id);
       return json({ ok: true });
+    }
+    if (action === "official") {   // отметить обои как обои создателя Подоконника или снять отметку
+      this.sql.exec("UPDATE items SET official = 1 - COALESCE(official, 0) WHERE id = ?", id);
+      return json({ ok: true, official: !it.official });
     }
     if (action === "unban" && it.iph) {
       this.sql.exec("DELETE FROM bans WHERE iph = ?", it.iph);

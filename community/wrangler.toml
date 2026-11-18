@@ -1,0 +1,16 @@
+# Сервер обоев сообщества Подоконника (Cloudflare Workers, бесплатный план).
+# Список, жалобы и только что загруженные файлы хранит один Durable Object с SQLite.
+# Раз в 15 минут GitHub Actions (.github/workflows/community.yml) переносит файлы
+# в релизы этого репозитория (community-1, community-2, …) и удаляет их отсюда.
+name = "community"
+main = "src/index.js"
+compatibility_date = "2025-09-01"
+workers_dev = true
+
+[[durable_objects.bindings]]
+name = "HUB"
+class_name = "Hub"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Hub"]

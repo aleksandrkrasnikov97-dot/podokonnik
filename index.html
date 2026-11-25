@@ -139,6 +139,9 @@ a { color: var(--lamp); text-underline-offset: 3px; }
 .top-support { font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
 .top-support:hover { color: var(--lamp); }
 .top-support svg { width: 16px; height: 16px; color: #ff7a8a; }
+.top-tg svg, .btn-tg svg { color: #2aabee !important; }
+.top-right .top-tg { margin-right: 14px; }
+.support-btns { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 
 .title-row { position: relative; margin-top: 64px; }
 h1.title {
@@ -355,6 +358,10 @@ footer p { margin: 4px 0; max-width: 80ch; }
           <button type="button" data-s="summer" aria-pressed="false">Лето</button>
           <button type="button" data-s="autumn" aria-pressed="false">Осень</button>
         </div>
+        <a class="top-support top-tg" href="https://t.me/KrasnenkiySasha" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.2 3.6 2.9 10.7c-1.2.5-1.2 1.3-.2 1.6l4.7 1.5 10.9-6.9c.5-.3 1-.1.6.2l-8.8 8-.3 4.9c.5 0 .7-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.9-1.3-1.5z"/></svg>
+          Telegram
+        </a>
         <a class="top-support" href="https://www.donationalerts.com/r/aleshikat" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 5.3 3.1 1.7-1.9 3.2-3.1 5.3-3.1 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg>
           Поддержать
@@ -373,6 +380,10 @@ footer p { margin: 4px 0; max-width: 80ch; }
       <a class="btn" href="Podokonnik-Setup.exe" download="Подоконник — установка.exe">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 20h16"/></svg>
         Скачать бесплатно
+      </a>
+      <a class="btn-line btn-tg" href="https://t.me/KrasnenkiySasha" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.2 3.6 2.9 10.7c-1.2.5-1.2 1.3-.2 1.6l4.7 1.5 10.9-6.9c.5-.3 1-.1.6.2l-8.8 8-.3 4.9c.5 0 .7-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.9-1.3-1.5z"/></svg>
+        Канал в Telegram
       </a>
       <a class="btn-line" href="https://www.donationalerts.com/r/aleshikat" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 5.3 3.1 1.7-1.9 3.2-3.1 5.3-3.1 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg>
@@ -736,10 +747,16 @@ footer p { margin: 4px 0; max-width: 80ch; }
       <p>Подоконник бесплатный и без рекламы. Если он тебе понравился, можно отправить донат через DonationAlerts.</p>
       <span class="note">спасибо!</span>
     </div>
-    <a class="btn" href="https://www.donationalerts.com/r/aleshikat" target="_blank" rel="noopener">
+<div class="support-btns">
+        <a class="btn" href="https://www.donationalerts.com/r/aleshikat" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.6 1.2 5.3 3.1 1.7-1.9 3.2-3.1 5.3-3.1 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg>
       Поддержать на DonationAlerts
     </a>
+    <a class="btn-line btn-tg" href="https://t.me/KrasnenkiySasha" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.2 3.6 2.9 10.7c-1.2.5-1.2 1.3-.2 1.6l4.7 1.5 10.9-6.9c.5-.3 1-.1.6.2l-8.8 8-.3 4.9c.5 0 .7-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.9-1.3-1.5z"/></svg>
+      Канал в Telegram
+    </a>
+    </div>
   </section>
 </main>
 

@@ -1,0 +1,10 @@
+base colloid
+folder
+folder-open
+folder-desktop
+folder-documents
+folder-download
+folder-music
+folder-pictures
+folder-videos
+user-home

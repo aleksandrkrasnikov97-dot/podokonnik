@@ -1,0 +1,13 @@
+folder
+folder-open
+folder-download
+folder-documents
+folder-music
+folder-pictures
+folder-videos
+folder-desktop
+user-home
+computer
+trash
+trash-full
+tile

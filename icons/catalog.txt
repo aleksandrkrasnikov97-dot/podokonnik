@@ -1,0 +1,465 @@
+# Паки иконок Подоконника. pack: id, имя, имя (en), авторы, лицензия, адрес, значков, программ, игр Steam, семейство, цвет. rule: id значка, признаки ярлыка
+rule	chrome	e:chrome n:google chrome
+rule	firefox	e:firefox n:firefox n:mozilla firefox
+rule	edge	e:msedge n:microsoft edge
+rule	yandex-browser	p:\yandexbrowser\ n:yandex n:яндекс n:yandex browser n:яндекс браузер
+rule	opera	p:\programs\opera\ n:opera n:браузер opera
+rule	opera-gx	p:\programs\opera gx\ n:opera gx n:браузер opera gx
+rule	brave	e:brave n:brave
+rule	vivaldi	e:vivaldi n:vivaldi
+rule	tor	p:\tor browser\ n:tor browser n:start tor browser
+rule	telegram	e:telegram n:telegram n:telegram desktop e:ayugram
+rule	discord	e:discord p:\discord\ n:discord
+rule	whatsapp	e:whatsapp n:whatsapp
+rule	viber	e:viber n:viber
+rule	skype	e:skype n:skype
+rule	zoom	e:zoom n:zoom n:zoom workplace
+rule	slack	e:slack n:slack
+rule	teams	e:ms-teams e:teams n:microsoft teams n:teams
+rule	vk	n:vk n:vk messenger n:вконтакте e:vk messenger
+rule	max	n:max e:max
+rule	steam	e:steam n:steam
+rule	epic	e:epicgameslauncher n:epic games launcher n:epic games
+rule	battlenet	e:battle.net launcher e:battle.net n:battle.net
+rule	ea	e:eadesktop e:ealauncher n:ea n:ea app
+rule	gog	e:galaxyclient n:gog galaxy
+rule	ubisoft	e:ubisoftconnect e:upc n:ubisoft connect
+rule	xbox	n:xbox e:xboxpcapp
+rule	minecraft	e:minecraftlauncher e:minecraft n:minecraft n:minecraft launcher
+rule	tlauncher	e:tlauncher n:tlauncher
+rule	lunar	e:lunar client n:lunar client
+rule	roblox	e:robloxplayerbeta e:robloxplayerlauncher e:robloxplayerlauncherbeta n:roblox player n:roblox
+rule	roblox-studio	e:robloxstudiobeta e:robloxstudiolauncherbeta n:roblox studio
+rule	league	e:leagueclient e:riotclientservices n:league of legends
+rule	gta5	e:gta5 e:playgtav e:gta5_enhanced n:grand theft auto v n:gta v n:gta 5
+rule	cyberpunk	e:cyberpunk2077 n:cyberpunk 2077
+rule	wot	e:worldoftanks e:wgc n:мир танков n:world of tanks n:wargaming.net game center n:lesta game center
+rule	warthunder	p:\war thunder\ n:war thunder
+rule	warframe	n:warframe
+rule	osu	e:osu! n:osu! n:osu
+rule	geforcenow	e:geforcenow n:geforce now n:nvidia geforce now
+rule	nvidia	n:nvidia app n:geforce experience n:nvidia control panel
+rule	amd	e:radeonsoftware n:amd software
+rule	spotify	e:spotify n:spotify
+rule	yandex-music	n:яндекс музыка n:yandex music p:\yandexmusic
+rule	vlc	e:vlc n:vlc media player n:vlc
+rule	obs	e:obs64 e:obs n:obs studio
+rule	aimp	e:aimp n:aimp
+rule	audacity	e:audacity n:audacity
+rule	itunes	e:itunes n:itunes
+rule	twitch	n:twitch
+rule	youtube	n:youtube
+rule	netflix	n:netflix
+rule	tiktok	n:tiktok
+rule	instagram	n:instagram
+rule	photoshop	e:photoshop n:adobe photoshop
+rule	illustrator	e:illustrator n:adobe illustrator
+rule	premiere	e:adobe premiere pro n:adobe premiere pro
+rule	aftereffects	e:afterfx n:adobe after effects
+rule	lightroom	e:lightroom n:adobe lightroom n:adobe lightroom classic
+rule	audition	e:adobe audition n:adobe audition
+rule	animate	e:animate n:adobe animate
+rule	mediaencoder	e:adobe media encoder n:adobe media encoder
+rule	acrobat	e:acrobat e:acrord32 n:adobe acrobat n:adobe acrobat reader
+rule	blender	e:blender e:blender-launcher n:blender
+rule	gimp	e:gimp-2.10 e:gimp-3.0 e:gimp n:gimp
+rule	krita	e:krita n:krita
+rule	inkscape	e:inkscape n:inkscape
+rule	resolve	e:resolve n:davinci resolve
+rule	capcut	e:capcut n:capcut
+rule	figma	e:figma n:figma
+rule	flstudio	e:fl64 e:fl n:fl studio
+rule	unityhub	e:unity hub n:unity hub
+rule	unreal	e:unrealeditor n:unreal engine
+rule	godot	e:godot n:godot n:godot engine
+rule	aseprite	e:aseprite n:aseprite
+rule	shotcut	e:shotcut n:shotcut
+rule	kdenlive	e:kdenlive n:kdenlive
+rule	handbrake	e:handbrake n:handbrake
+rule	vscode	e:code n:visual studio code
+rule	cursor	e:cursor n:cursor
+rule	vstudio	e:devenv n:visual studio 2022 n:visual studio 2019 n:visual studio
+rule	idea	e:idea64 n:intellij idea n:intellij idea community edition
+rule	pycharm	e:pycharm64 n:pycharm n:pycharm community edition
+rule	webstorm	e:webstorm64 n:webstorm
+rule	rider	e:rider64 n:rider n:jetbrains rider
+rule	clion	e:clion64 n:clion
+rule	androidstudio	e:studio64 n:android studio
+rule	git	e:git-bash n:git bash n:git gui e:git-gui
+rule	terminal	e:windowsterminal e:wt n:terminal n:windows terminal
+rule	cmd	e:cmd n:командная строка n:command prompt
+rule	powershell	e:powershell e:pwsh n:windows powershell n:powershell
+rule	notepadpp	e:notepad++ n:notepad++
+rule	notepad	e:notepad n:блокнот n:notepad
+rule	sublime	e:sublime_text n:sublime text
+rule	githubdesktop	e:githubdesktop n:github desktop
+rule	docker	e:docker desktop n:docker desktop
+rule	postman	e:postman n:postman
+rule	python	e:python e:pythonw e:idle n:idle n:python
+rule	word	e:winword n:word
+rule	excel	e:excel n:excel
+rule	powerpoint	e:powerpnt n:powerpoint
+rule	outlook	e:outlook e:olk n:outlook n:outlook (classic)
+rule	onenote	e:onenote n:onenote
+rule	onedrive	e:onedrive n:onedrive
+rule	wps	e:wps n:wps office
+rule	libreoffice	e:soffice n:libreoffice
+rule	notion	e:notion n:notion
+rule	obsidian	e:obsidian n:obsidian
+rule	evernote	e:evernote n:evernote
+rule	gdrive	n:google drive e:googledrivefs
+rule	yandex-disk	n:яндекс диск n:yandex disk p:\yandex.disk
+rule	dropbox	e:dropbox n:dropbox
+rule	anki	e:anki n:anki
+rule	7zip	e:7zfm n:7-zip file manager n:7-zip
+rule	winrar	e:winrar n:winrar
+rule	qbittorrent	e:qbittorrent n:qbittorrent
+rule	utorrent	e:utorrent n:utorrent n:µtorrent
+rule	calc	e:calc n:калькулятор n:calculator
+rule	explorer	e:explorer n:проводник n:file explorer
+rule	control	e:control n:панель управления n:control panel
+rule	taskmgr	e:taskmgr n:диспетчер задач n:task manager
+rule	anydesk	e:anydesk n:anydesk
+rule	teamviewer	e:teamviewer n:teamviewer
+rule	rustdesk	e:rustdesk n:rustdesk
+rule	virtualbox	e:virtualbox n:oracle vm virtualbox n:virtualbox
+rule	vmware	e:vmware n:vmware workstation pro n:vmware workstation
+rule	keepass	e:keepassxc e:keepass n:keepassxc n:keepass
+rule	bitwarden	e:bitwarden n:bitwarden
+rule	1password	e:1password n:1password
+rule	thunderbird	e:thunderbird n:thunderbird n:mozilla thunderbird
+rule	filezilla	e:filezilla n:filezilla
+rule	putty	e:putty n:putty
+rule	protonvpn	e:protonvpn n:proton vpn n:protonvpn
+rule	flameshot	e:flameshot n:flameshot
+rule	calibre	e:calibre n:calibre
+rule	terraria	e:terraria n:terraria
+rule	csgo	e:cs2 e:csgo n:counter-strike 2 n:counter-strike global offensive
+rule	dota2	e:dota2 n:dota 2
+rule	rust	e:rustclient n:rust
+rule	amongus	e:among us n:among us
+rule	stardew	e:stardew valley n:stardew valley
+rule	hollowknight	e:hollow_knight n:hollow knight
+rule	lutris	n:lutris
+rule	itch	e:itch n:itch
+rule	playnite	e:playnite.desktopapp n:playnite
+rule	wallpaperengine	e:wallpaper32 e:wallpaper64 n:wallpaper engine
+names	folder	folder
+names	folder-open	folder-open
+names	folder-desktop	user-desktop folder-desktop
+names	folder-documents	folder-documents
+names	folder-download	folder-download folder-downloads
+names	folder-music	folder-music
+names	folder-pictures	folder-pictures folder-images
+names	folder-videos	folder-videos folder-video
+names	user-home	user-home folder-home
+names	computer	computer system computer-laptop
+names	trash	user-trash trashcan_empty trash-empty
+names	trash-full	user-trash-full trashcan_full trash-full
+names	chrome	google-chrome chrome chromium-browser
+names	firefox	firefox org.mozilla.firefox
+names	edge	microsoft-edge com.microsoft.Edge
+names	yandex-browser	yandex-browser yandex-browser-beta
+names	opera	opera com.opera.Opera
+names	opera-gx	opera-gx opera com.opera.Opera
+names	brave	brave-browser brave com.brave.Browser
+names	vivaldi	vivaldi com.vivaldi.Vivaldi
+names	tor	tor-browser torbrowser torbrowser-launcher
+names	telegram	telegram org.telegram.desktop telegram-desktop
+names	discord	discord com.discordapp.Discord
+names	whatsapp	whatsapp whatsapp-desktop com.github.eneshecan.WhatsAppForLinux
+names	viber	viber com.viber.Viber
+names	skype	skype skypeforlinux ms-skype com.skype.Client
+names	zoom	Zoom zoom zoom-desktop us.zoom.Zoom
+names	slack	slack com.slack.Slack
+names	teams	teams teams-for-linux microsoft-teams
+names	vk	vk vk-messenger
+names	max	MAX max-messenger
+names	steam	steam steam-launcher com.valvesoftware.Steam
+names	epic	epic-games epic-games-launcher 09BE_EpicGamesLauncher.0 com.heroicgameslauncher.hgl heroic
+names	battlenet	battle.net battlenet blizzard
+names	ea	ea-app origin ea
+names	gog	gog-galaxy gog com.gog.Galaxy minigalaxy
+names	ubisoft	ubisoft-connect uplay ubisoft
+names	xbox	xbox xbox-app io.github.mimbrero.XboxGamePass
+names	minecraft	minecraft-launcher minecraft com.mojang.Minecraft
+names	tlauncher	tlauncher ru.turikhay.tlauncher minecraft-launcher minecraft
+names	lunar	lunar-client lunarclient
+names	roblox	CE93_RobloxPlayerLauncher.0 grapejuice-roblox-player net.brinkervii.grapejuice.robloxplayer roblox
+names	roblox-studio	631F_RobloxStudioLauncherBeta.0 grapejuice-roblox-studio net.brinkervii.grapejuice.robloxstudio
+names	league	league-of-legends leagueoflegends
+names	gta5	gta-5 steam_icon_271590
+names	cyberpunk	cyberpunk-2077 steam_icon_1091500
+names	wot	world-of-tanks com.worldoftanks.Client
+names	warthunder	war-thunder lutris_war-thunder
+names	warframe	warframe lutris_warframe
+names	osu	osu osu-lazer sh.ppy.osu
+names	geforcenow	geforcenow com.nvidia.geforcenow
+names	nvidia	nvidia nvidia-settings
+names	amd	amd amd-radeon
+names	spotify	spotify spotify-client com.spotify.Client
+names	yandex-music	yandex-music yandexmusic
+names	vlc	vlc org.videolan.VLC
+names	obs	com.obsproject.Studio obs obs-studio
+names	aimp	aimp
+names	audacity	audacity org.audacityteam.Audacity
+names	itunes	itunes
+names	twitch	twitch com.vinszent.GnomeTwitch gnome-twitch
+names	youtube	youtube youtube-music
+names	netflix	netflix
+names	tiktok	tiktok
+names	instagram	instagram
+names	photoshop	AdobePhotoshop photoshop adobe-photoshop
+names	illustrator	AdobeIllustrator illustrator adobe-illustrator
+names	premiere	AdobePremierePro adobe-premiere-pro
+names	aftereffects	AdobeAfterEffect adobe-after-effects
+names	lightroom	AdobeLightroom AdobeLightroomClassic
+names	audition	AdobeAudition
+names	animate	AdobeAnimate
+names	mediaencoder	AdobeMediaEncoder
+names	acrobat	com.adobe.Reader AdobeReader9 acroread adobe-reader
+names	blender	blender org.blender.Blender
+names	gimp	gimp org.gimp.GIMP
+names	krita	krita org.kde.krita
+names	inkscape	inkscape org.inkscape.Inkscape
+names	resolve	davinci-resolve resolve com.blackmagic.Resolve
+names	capcut	capcut
+names	figma	figma figma-linux
+names	flstudio	fl-studio flstudio
+names	unityhub	unityhub com.unity.UnityHub appimagekit-unityhub unity-editor-icon
+names	unreal	unreal-engine unrealengine ue4editor
+names	godot	godot org.godotengine.Godot
+names	aseprite	aseprite
+names	shotcut	shotcut org.shotcut.Shotcut
+names	kdenlive	kdenlive org.kde.kdenlive
+names	handbrake	fr.handbrake.ghb handbrake
+names	vscode	visual-studio-code code vscode com.visualstudio.code
+names	cursor	cursor
+names	vstudio	visual-studio vstudio
+names	idea	intellij-idea idea com.jetbrains.IntelliJ-IDEA-Community intellij-idea-community
+names	pycharm	pycharm com.jetbrains.PyCharm-Community pycharm-community
+names	webstorm	webstorm com.jetbrains.WebStorm
+names	rider	rider com.jetbrains.Rider
+names	clion	clion com.jetbrains.CLion
+names	androidstudio	android-studio com.google.AndroidStudio
+names	git	git git-gui gitg
+names	terminal	utilities-terminal terminal org.gnome.Terminal
+names	cmd	utilities-terminal terminal
+names	powershell	powershell utilities-terminal
+names	notepadpp	notepad++ notepadqq com.notepadqq.Notepadqq
+names	notepad	accessories-text-editor notepad org.gnome.TextEditor
+names	sublime	sublime-text com.sublimetext.three sublime_text
+names	githubdesktop	github-desktop io.github.shiftey.Desktop
+names	docker	docker-desktop docker
+names	postman	postman com.getpostman.Postman
+names	python	python idle python3
+names	word	ms-word com.wps.Office.wpsmain libreoffice-writer
+names	excel	ms-excel com.wps.Office.etmain libreoffice-calc
+names	powerpoint	ms-powerpoint com.wps.Office.wppmain libreoffice-impress
+names	outlook	ms-outlook outlook
+names	onenote	ms-onenote onenote
+names	onedrive	ms-onedrive onedrive
+names	wps	wps-office-wpsmain com.wps.Office.wpsmain wps-office2019-kprometheus
+names	libreoffice	libreoffice-startcenter libreoffice-main org.libreoffice.LibreOffice
+names	notion	notion notion-app notion-desktop
+names	obsidian	obsidian md.obsidian.Obsidian
+names	evernote	evernote
+names	gdrive	google-drive web-google-drive
+names	yandex-disk	yandex-disk
+names	dropbox	dropbox com.dropbox.Client
+names	anki	anki net.ankiweb.Anki
+names	7zip	7zip p7zip 7z
+names	winrar	winrar rar archive-manager file-roller
+names	qbittorrent	qbittorrent org.qbittorrent.qBittorrent
+names	utorrent	utorrent qbittorrent
+names	calc	accessories-calculator gnome-calculator calculator
+names	explorer	system-file-manager file-manager org.gnome.Nautilus
+names	control	preferences-system gnome-control-center systemsettings
+names	taskmgr	utilities-system-monitor gnome-system-monitor
+names	anydesk	anydesk com.anydesk.Anydesk
+names	teamviewer	teamviewer com.teamviewer.TeamViewer
+names	rustdesk	rustdesk com.rustdesk.RustDesk
+names	virtualbox	virtualbox org.virtualbox.VirtualBox
+names	vmware	vmware vmware-workstation
+names	keepass	keepassxc keepass org.keepassxc.KeePassXC
+names	bitwarden	bitwarden com.bitwarden.desktop
+names	1password	1password
+names	thunderbird	thunderbird org.mozilla.Thunderbird
+names	filezilla	filezilla org.filezillaproject.Filezilla
+names	putty	putty
+names	protonvpn	protonvpn proton-vpn-logo com.protonvpn.www
+names	flameshot	flameshot org.flameshot.Flameshot
+names	calibre	calibre com.calibre_ebook.calibre calibre-gui
+names	terraria	terraria steam_icon_105600
+names	csgo	csgo steam_icon_730
+names	dota2	dota2 steam_icon_570
+names	rust	rust steam_icon_252490
+names	amongus	among-us steam_icon_945360
+names	stardew	stardew-valley steam_icon_413150
+names	hollowknight	hollow-knight steam_icon_367520
+names	lutris	lutris
+names	itch	itch io.itch.itch
+names	playnite	playnite
+names	wallpaperengine	wallpaper-engine livewallpaper preferences-desktop-wallpaper
+pack	winter	Зимний — свой	Winter — our own	Подоконник (нарисовано нейросетью)	бесплатно	https://aleksandrkrasnikov97-dot.github.io/podokonnik/	12	0	0	winter	#9fd4ff
+pack	newyear	Новогодний — свой	New Year — our own	Подоконник (нарисовано нейросетью)	бесплатно	https://aleksandrkrasnikov97-dot.github.io/podokonnik/	12	0	0	newyear	#d32f2f
+pack	papirus	Papirus	Papirus	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#5294e2
+pack	papirus-adwaita	Papirus — Adwaita	Papirus — Adwaita	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#93c0ea
+pack	papirus-black	Papirus — чёрный	Papirus — black	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#4f4f4f
+pack	papirus-bluegrey	Papirus — сине-серый	Papirus — blue grey	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#607d8b
+pack	papirus-breeze	Papirus — Breeze	Papirus — Breeze	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#57b8ec
+pack	papirus-brown	Papirus — коричневый	Papirus — brown	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#ae8e6c
+pack	papirus-carmine	Papirus — кармин	Papirus — carmine	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#a30002
+pack	papirus-cyan	Papirus — голубой	Papirus — cyan	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#00bcd4
+pack	papirus-darkcyan	Papirus — тёмно-голубой	Papirus — dark cyan	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#45abb7
+pack	papirus-deeporange	Papirus — морковный	Papirus — deep orange	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#eb6637
+pack	papirus-green	Papirus — зелёный	Papirus — green	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#87b158
+pack	papirus-grey	Papirus — серый	Papirus — grey	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#8e8e8e
+pack	papirus-indigo	Papirus — индиго	Papirus — indigo	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#5c6bc0
+pack	papirus-magenta	Papirus — пурпурный	Papirus — magenta	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#ca71df
+pack	papirus-nordic	Papirus — северный	Papirus — nordic	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#81a1c1
+pack	papirus-orange	Papirus — оранжевый	Papirus — orange	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#ee923a
+pack	papirus-palebrown	Papirus — бежевый	Papirus — pale brown	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#d1bfae
+pack	papirus-paleorange	Papirus — персиковый	Papirus — pale orange	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#eeca8f
+pack	papirus-pink	Papirus — розовый	Papirus — pink	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#f06292
+pack	papirus-red	Papirus — красный	Papirus — red	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#e25252
+pack	papirus-teal	Papirus — бирюзовый	Papirus — teal	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#16a085
+pack	papirus-violet	Papirus — фиолетовый	Papirus — violet	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#7e57c2
+pack	papirus-white	Papirus — белый	Papirus — white	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#e4e4e4
+pack	papirus-yaru	Papirus — Yaru	Papirus — Yaru	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#676767
+pack	papirus-yellow	Papirus — жёлтый	Papirus — yellow	Papirus Development Team	GPL-3.0	https://github.com/PapirusDevelopmentTeam/papirus-icon-theme	539	139	387	papirus	#f9bd30
+pack	candy	Candy — неон	Candy — neon	EliverLara	GPL-3.0	https://github.com/EliverLara/candy-icons	121	100	8	candy	#ff4fb5
+pack	numix	Numix Circle — круглые	Numix Circle — round	Numix Project	GPL-3.0	https://github.com/numixproject/numix-icon-theme-circle	635	122	512	numix	#f0544c
+pack	whitesur	WhiteSur — как на Mac	WhiteSur — Mac style	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/WhiteSur-icon-theme	169	105	51	whitesur	#5fa8f5
+pack	whitesur-green	WhiteSur — как на Mac — зелёный	WhiteSur — Mac style — green	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/WhiteSur-icon-theme	169	105	51	whitesur	#66bb6a
+pack	whitesur-grey	WhiteSur — как на Mac — серый	WhiteSur — Mac style — grey	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/WhiteSur-icon-theme	169	105	51	whitesur	#9e9e9e
+pack	whitesur-nord	WhiteSur — как на Mac — Nord	WhiteSur — Mac style — Nord	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/WhiteSur-icon-theme	169	105	51	whitesur	#81a1c1
+pack	whitesur-orange	WhiteSur — как на Mac — оранжевый	WhiteSur — Mac style — orange	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/WhiteSur-icon-theme	169	105	51	whitesur	#ff9800
+pack	whitesur-pink	WhiteSur — как на Mac — розовый	WhiteSur — Mac style — pink	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/WhiteSur-icon-theme	169	105	51	whitesur	#f06292
+pack	whitesur-purple	WhiteSur — как на Mac — фиолетовый	WhiteSur — Mac style — purple	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/WhiteSur-icon-theme	169	105	51	whitesur	#ab47bc
+pack	whitesur-red	WhiteSur — как на Mac — красный	WhiteSur — Mac style — red	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/WhiteSur-icon-theme	169	105	51	whitesur	#ef5350
+pack	whitesur-yellow	WhiteSur — как на Mac — жёлтый	WhiteSur — Mac style — yellow	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/WhiteSur-icon-theme	169	105	51	whitesur	#ffca28
+pack	win11	Win11	Win11	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Win11-icon-theme	93	70	10	win11	#ffc94d
+pack	win11-black	Win11 — чёрный	Win11 — black	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Win11-icon-theme	93	70	10	win11	#555555
+pack	win11-blue	Win11 — синий	Win11 — blue	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Win11-icon-theme	93	70	10	win11	#3d8ee8
+pack	win11-green	Win11 — зелёный	Win11 — green	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Win11-icon-theme	93	70	10	win11	#43a047
+pack	win11-nord	Win11 — Nord	Win11 — Nord	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Win11-icon-theme	93	70	10	win11	#81a1c1
+pack	win11-purple	Win11 — фиолетовый	Win11 — purple	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Win11-icon-theme	93	70	10	win11	#8e5bd6
+pack	win11-red	Win11 — красный	Win11 — red	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Win11-icon-theme	93	70	10	win11	#e53935
+pack	we10x	We10X	We10X	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/We10X-icon-theme	104	81	10	we10x	#ffca28
+pack	we10x-black	We10X — чёрный	We10X — black	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/We10X-icon-theme	104	81	10	we10x	#555555
+pack	we10x-blue	We10X — синий	We10X — blue	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/We10X-icon-theme	104	81	10	we10x	#3d8ee8
+pack	we10x-green	We10X — зелёный	We10X — green	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/We10X-icon-theme	104	81	10	we10x	#43a047
+pack	we10x-orange	We10X — оранжевый	We10X — orange	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/We10X-icon-theme	104	81	10	we10x	#fb8c00
+pack	we10x-purple	We10X — фиолетовый	We10X — purple	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/We10X-icon-theme	104	81	10	we10x	#8e5bd6
+pack	we10x-red	We10X — красный	We10X — red	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/We10X-icon-theme	104	81	10	we10x	#e53935
+pack	we10x-special	We10X — особый	We10X — special	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/We10X-icon-theme	104	81	10	we10x	#26c6da
+pack	reversal	Reversal	Reversal	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Reversal-icon-theme	120	101	6	reversal	#5294e2
+pack	reversal-black	Reversal — чёрный	Reversal — black	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Reversal-icon-theme	120	101	6	reversal	#555555
+pack	reversal-blue	Reversal — синий	Reversal — blue	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Reversal-icon-theme	120	101	6	reversal	#3d8ee8
+pack	reversal-brown	Reversal — коричневый	Reversal — brown	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Reversal-icon-theme	120	101	6	reversal	#8d6e63
+pack	reversal-cyan	Reversal — голубой	Reversal — cyan	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Reversal-icon-theme	120	101	6	reversal	#26c6da
+pack	reversal-green	Reversal — зелёный	Reversal — green	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Reversal-icon-theme	120	101	6	reversal	#43a047
+pack	reversal-grey	Reversal — серый	Reversal — grey	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Reversal-icon-theme	120	101	6	reversal	#9e9e9e
+pack	reversal-lightblue	Reversal — светло-голубой	Reversal — light blue	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Reversal-icon-theme	120	101	6	reversal	#64b5f6
+pack	reversal-orange	Reversal — оранжевый	Reversal — orange	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Reversal-icon-theme	120	101	6	reversal	#fb8c00
+pack	reversal-pink	Reversal — розовый	Reversal — pink	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Reversal-icon-theme	120	101	6	reversal	#ec407a
+pack	reversal-purple	Reversal — фиолетовый	Reversal — purple	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Reversal-icon-theme	120	101	6	reversal	#8e5bd6
+pack	reversal-red	Reversal — красный	Reversal — red	yeyushengfan258	GPL-3.0	https://github.com/yeyushengfan258/Reversal-icon-theme	120	101	6	reversal	#e53935
+pack	mcmojave	McMojave — круглые	McMojave Circle	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/McMojave-circle	132	96	23	mcmojave	#2f9cf0
+pack	mcmojave-red	McMojave — круглые — красный	McMojave Circle — red	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/McMojave-circle	132	96	23	mcmojave	#ef5350
+pack	mcmojave-pink	McMojave — круглые — розовый	McMojave Circle — pink	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/McMojave-circle	132	96	23	mcmojave	#f06292
+pack	mcmojave-purple	McMojave — круглые — фиолетовый	McMojave Circle — purple	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/McMojave-circle	132	96	23	mcmojave	#ab47bc
+pack	mcmojave-blue	McMojave — круглые — синий	McMojave Circle — blue	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/McMojave-circle	132	96	23	mcmojave	#3d8ee8
+pack	mcmojave-green	McMojave — круглые — зелёный	McMojave Circle — green	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/McMojave-circle	132	96	23	mcmojave	#66bb6a
+pack	mcmojave-yellow	McMojave — круглые — жёлтый	McMojave Circle — yellow	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/McMojave-circle	132	96	23	mcmojave	#ffca28
+pack	mcmojave-orange	McMojave — круглые — оранжевый	McMojave Circle — orange	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/McMojave-circle	132	96	23	mcmojave	#ff9800
+pack	mcmojave-brown	McMojave — круглые — коричневый	McMojave Circle — brown	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/McMojave-circle	132	96	23	mcmojave	#8d6e63
+pack	mcmojave-grey	McMojave — круглые — серый	McMojave Circle — grey	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/McMojave-circle	132	96	23	mcmojave	#9e9e9e
+pack	mcmojave-black	McMojave — круглые — чёрный	McMojave Circle — black	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/McMojave-circle	132	96	23	mcmojave	#555555
+pack	fluent	Fluent	Fluent	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Fluent-icon-theme	134	97	24	fluent	#198ee6
+pack	fluent-green	Fluent — зелёный	Fluent — green	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Fluent-icon-theme	134	97	24	fluent	#67cb6b
+pack	fluent-grey	Fluent — серый	Fluent — grey	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Fluent-icon-theme	134	97	24	fluent	#808080
+pack	fluent-orange	Fluent — оранжевый	Fluent — orange	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Fluent-icon-theme	134	97	24	fluent	#ff9c33
+pack	fluent-pink	Fluent — розовый	Fluent — pink	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Fluent-icon-theme	134	97	24	fluent	#ff5c93
+pack	fluent-purple	Fluent — фиолетовый	Fluent — purple	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Fluent-icon-theme	134	97	24	fluent	#dc63ee
+pack	fluent-red	Fluent — красный	Fluent — red	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Fluent-icon-theme	134	97	24	fluent	#ff6666
+pack	fluent-yellow	Fluent — жёлтый	Fluent — yellow	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Fluent-icon-theme	134	97	24	fluent	#ffcb52
+pack	fluent-teal	Fluent — бирюзовый	Fluent — teal	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Fluent-icon-theme	134	97	24	fluent	#32c8ba
+pack	tela	Tela	Tela	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-icon-theme	134	96	25	tela	#5294e2
+pack	tela-black	Tela — чёрный	Tela — black	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-icon-theme	134	96	25	tela	#4d4d4d
+pack	tela-blue	Tela — синий	Tela — blue	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-icon-theme	134	96	25	tela	#5677fc
+pack	tela-brown	Tela — коричневый	Tela — brown	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-icon-theme	134	96	25	tela	#795548
+pack	tela-green	Tela — зелёный	Tela — green	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-icon-theme	134	96	25	tela	#66bb6a
+pack	tela-grey	Tela — серый	Tela — grey	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-icon-theme	134	96	25	tela	#bdbdbd
+pack	tela-orange	Tela — оранжевый	Tela — orange	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-icon-theme	134	96	25	tela	#ff9800
+pack	tela-pink	Tela — розовый	Tela — pink	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-icon-theme	134	96	25	tela	#f06292
+pack	tela-purple	Tela — фиолетовый	Tela — purple	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-icon-theme	134	96	25	tela	#7e57c2
+pack	tela-red	Tela — красный	Tela — red	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-icon-theme	134	96	25	tela	#ef5350
+pack	tela-yellow	Tela — жёлтый	Tela — yellow	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-icon-theme	134	96	25	tela	#ffca28
+pack	tela-manjaro	Tela — Manjaro	Tela — Manjaro	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-icon-theme	134	96	25	tela	#16a085
+pack	tela-ubuntu	Tela — Ubuntu	Tela — Ubuntu	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-icon-theme	134	96	25	tela	#fb8441
+pack	tela-dracula	Tela — Dracula	Tela — Dracula	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-icon-theme	134	96	25	tela	#44475a
+pack	tela-nord	Tela — Nord	Tela — Nord	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-icon-theme	134	96	25	tela	#4d576a
+pack	telacircle	Tela Circle — круглые	Tela Circle	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-circle-icon-theme	135	97	25	telacircle	#5294e2
+pack	telacircle-black	Tela Circle — круглые — чёрный	Tela Circle — black	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-circle-icon-theme	135	97	25	telacircle	#4d4d4d
+pack	telacircle-blue	Tela Circle — круглые — синий	Tela Circle — blue	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-circle-icon-theme	135	97	25	telacircle	#5677fc
+pack	telacircle-brown	Tela Circle — круглые — коричневый	Tela Circle — brown	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-circle-icon-theme	135	97	25	telacircle	#795548
+pack	telacircle-green	Tela Circle — круглые — зелёный	Tela Circle — green	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-circle-icon-theme	135	97	25	telacircle	#66bb6a
+pack	telacircle-grey	Tela Circle — круглые — серый	Tela Circle — grey	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-circle-icon-theme	135	97	25	telacircle	#bdbdbd
+pack	telacircle-orange	Tela Circle — круглые — оранжевый	Tela Circle — orange	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-circle-icon-theme	135	97	25	telacircle	#ff9800
+pack	telacircle-pink	Tela Circle — круглые — розовый	Tela Circle — pink	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-circle-icon-theme	135	97	25	telacircle	#f06292
+pack	telacircle-purple	Tela Circle — круглые — фиолетовый	Tela Circle — purple	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-circle-icon-theme	135	97	25	telacircle	#7e57c2
+pack	telacircle-red	Tela Circle — круглые — красный	Tela Circle — red	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-circle-icon-theme	135	97	25	telacircle	#ef5350
+pack	telacircle-yellow	Tela Circle — круглые — жёлтый	Tela Circle — yellow	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-circle-icon-theme	135	97	25	telacircle	#ffca28
+pack	telacircle-manjaro	Tela Circle — круглые — Manjaro	Tela Circle — Manjaro	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-circle-icon-theme	135	97	25	telacircle	#16a085
+pack	telacircle-ubuntu	Tela Circle — круглые — Ubuntu	Tela Circle — Ubuntu	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-circle-icon-theme	135	97	25	telacircle	#fb8441
+pack	telacircle-dracula	Tela Circle — круглые — Dracula	Tela Circle — Dracula	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-circle-icon-theme	135	97	25	telacircle	#44475a
+pack	telacircle-nord	Tela Circle — круглые — Nord	Tela Circle — Nord	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Tela-circle-icon-theme	135	97	25	telacircle	#4d576a
+pack	colloid	Colloid	Colloid	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#60c0f0
+pack	colloid-purple	Colloid — фиолетовый	Colloid — purple	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#BA68C8
+pack	colloid-pink	Colloid — розовый	Colloid — pink	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#F06292
+pack	colloid-red	Colloid — красный	Colloid — red	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#F44336
+pack	colloid-orange	Colloid — оранжевый	Colloid — orange	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#FB8C00
+pack	colloid-yellow	Colloid — жёлтый	Colloid — yellow	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#FFD600
+pack	colloid-green	Colloid — зелёный	Colloid — green	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#66BB6A
+pack	colloid-teal	Colloid — бирюзовый	Colloid — teal	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#4DB6AC
+pack	colloid-grey	Colloid — серый	Colloid — grey	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#888888
+pack	colloid-nord	Colloid — Nord синий	Colloid — Nord blue	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#89a3c2
+pack	colloid-nord-purple	Colloid — Nord фиолетовый	Colloid — Nord purple	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#c89dbf
+pack	colloid-nord-pink	Colloid — Nord розовый	Colloid — Nord pink	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#dc98b1
+pack	colloid-nord-red	Colloid — Nord красный	Colloid — Nord red	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#d4878f
+pack	colloid-nord-orange	Colloid — Nord оранжевый	Colloid — Nord orange	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#dca493
+pack	colloid-nord-yellow	Colloid — Nord жёлтый	Colloid — Nord yellow	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#eac985
+pack	colloid-nord-green	Colloid — Nord зелёный	Colloid — Nord green	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#a0c082
+pack	colloid-nord-teal	Colloid — Nord бирюзовый	Colloid — Nord teal	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#83b9b8
+pack	colloid-dracula	Colloid — Dracula синий	Colloid — Dracula blue	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#6272a4
+pack	colloid-dracula-purple	Colloid — Dracula фиолетовый	Colloid — Dracula purple	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#bd93f9
+pack	colloid-dracula-pink	Colloid — Dracula розовый	Colloid — Dracula pink	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#ff79c6
+pack	colloid-dracula-red	Colloid — Dracula красный	Colloid — Dracula red	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#ff5555
+pack	colloid-dracula-orange	Colloid — Dracula оранжевый	Colloid — Dracula orange	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#ffb86c
+pack	colloid-dracula-yellow	Colloid — Dracula жёлтый	Colloid — Dracula yellow	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#f1fa8c
+pack	colloid-dracula-green	Colloid — Dracula зелёный	Colloid — Dracula green	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Colloid-icon-theme	171	107	51	colloid	#50fa7b
+pack	vimix	Vimix	Vimix	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Vimix-icon-theme	80	64	3	vimix	#f4be70
+pack	vimix-amber	Vimix — янтарь	Vimix — amber	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Vimix-icon-theme	80	64	3	vimix	#f89406
+pack	vimix-amethyst	Vimix — аметист	Vimix — amethyst	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Vimix-icon-theme	80	64	3	vimix	#ab47bc
+pack	vimix-axinite	Vimix — аксинит	Vimix — axinite	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Vimix-icon-theme	80	64	3	vimix	#8b6039
+pack	vimix-beryl	Vimix — берилл	Vimix — beryl	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Vimix-icon-theme	80	64	3	vimix	#2eb398
+pack	vimix-doder	Vimix — синий	Vimix — doder	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Vimix-icon-theme	80	64	3	vimix	#4285f4
+pack	vimix-ruby	Vimix — рубин	Vimix — ruby	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Vimix-icon-theme	80	64	3	vimix	#f0544c
+pack	vimix-jade	Vimix — нефрит	Vimix — jade	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Vimix-icon-theme	80	64	3	vimix	#86be43
+pack	vimix-black	Vimix — чёрный	Vimix — black	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Vimix-icon-theme	80	64	3	vimix	#686868
+pack	qogir	Qogir	Qogir	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Qogir-icon-theme	136	98	25	qogir	#5294e2
+pack	qogir-manjaro	Qogir — Manjaro	Qogir — Manjaro	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Qogir-icon-theme	136	98	25	qogir	#2eb398
+pack	qogir-ubuntu	Qogir — Ubuntu	Qogir — Ubuntu	Vince Liuice	GPL-3.0	https://github.com/vinceliuice/Qogir-icon-theme	136	98	25	qogir	#fb8441
+pack	nordzy	Nordzy — северные	Nordzy	alvatip	GPL-3.0	https://github.com/alvatip/Nordzy-icon	84	70	1	nordzy	#81a1c1
+pack	nordzy-cyan	Nordzy — северные — голубой	Nordzy — cyan	alvatip	GPL-3.0	https://github.com/alvatip/Nordzy-icon	84	70	1	nordzy	#88c0d0
+pack	nordzy-green	Nordzy — северные — зелёный	Nordzy — green	alvatip	GPL-3.0	https://github.com/alvatip/Nordzy-icon	84	70	1	nordzy	#a3be8c
+pack	nordzy-orange	Nordzy — северные — оранжевый	Nordzy — orange	alvatip	GPL-3.0	https://github.com/alvatip/Nordzy-icon	84	70	1	nordzy	#d08770
+pack	nordzy-pink	Nordzy — северные — розовый	Nordzy — pink	alvatip	GPL-3.0	https://github.com/alvatip/Nordzy-icon	84	70	1	nordzy	#b48ead
+pack	nordzy-purple	Nordzy — северные — фиолетовый	Nordzy — purple	alvatip	GPL-3.0	https://github.com/alvatip/Nordzy-icon	84	70	1	nordzy	#9b7fc0
+pack	nordzy-red	Nordzy — северные — красный	Nordzy — red	alvatip	GPL-3.0	https://github.com/alvatip/Nordzy-icon	84	70	1	nordzy	#bf616a
+pack	nordzy-turquoise	Nordzy — северные — бирюзовый	Nordzy — turquoise	alvatip	GPL-3.0	https://github.com/alvatip/Nordzy-icon	84	70	1	nordzy	#8fbcbb
+pack	nordzy-yellow	Nordzy — северные — жёлтый	Nordzy — yellow	alvatip	GPL-3.0	https://github.com/alvatip/Nordzy-icon	84	70	1	nordzy	#ebcb8b
+pack	kora	Kora	Kora	bikass	GPL-3.0	https://github.com/bikass/kora	137	122	2	kora	#2d9cdb
+pack	kora-grey	Kora — серый	Kora — grey	bikass	GPL-3.0	https://github.com/bikass/kora	137	122	2	kora	#9aa0a6
